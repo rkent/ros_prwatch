@@ -26,6 +26,15 @@ GITHUB_TOKEN=ghp_...
 
 List the GitHub organizations to examine in `orgs.txt`, one per line.
 
+## Building the website
+
+To collect all data and build the site in `_site/` in one step (about 25
+minutes; creates the venv if needed):
+
+```bash
+./build.sh
+```
+
 ## Scripts
 
 Run the scripts in this order; each step reads the output of the earlier ones.
