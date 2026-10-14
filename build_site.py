@@ -1,0 +1,344 @@
+#!/usr/bin/env python3
+"""Build a static website of the results in _site/.
+
+Reads artifacts/first_response.json and artifacts/stale_prs.json and writes a
+single self-contained page, _site/index.html.
+"""
+
+import json
+from collections import Counter
+from datetime import datetime
+from html import escape
+from pathlib import Path
+
+from committers import comparison_rows, load_prs, merge_counts
+from first_response import OUTPUT_FILE as FIRST_RESPONSE_FILE, ROOT, format_duration
+from stale_prs import OUTPUT_FILE as STALE_FILE
+
+SITE_DIR = ROOT / "_site"
+PERCENTILES = [25, 50, 75, 90, 95, 99]
+
+
+def fmt(seconds):
+    return "–" if seconds is None else format_duration(seconds)
+
+
+def fmt_date(iso):
+    return iso[:10]
+
+
+def gh_link(path, text=None):
+    return (f'<a href="https://github.com/{escape(path)}">'
+            f'{escape(text if text is not None else path)}</a>')
+
+
+def percentile(sorted_values, pct):
+    index = min(len(sorted_values) - 1, round(pct / 100 * (len(sorted_values) - 1)))
+    return sorted_values[index]
+
+
+def stat_card(value, label):
+    return (f'<div class="card"><div class="value">{escape(str(value))}</div>'
+            f'<div class="label">{escape(label)}</div></div>')
+
+
+def stale_table(stale_prs):
+    rows = []
+    for pr in sorted(stale_prs, key=lambda pr: pr["createdAt"], reverse=True):
+        neglected = pr["committerComments"] == 0
+        days = pr["waitingSeconds"] // 86400
+        role = "committer" if pr["authorIsCommitter"] else "contributor"
+        rows.append(f"""<tr data-repo="{escape(pr['repo'])}" data-neglected="{int(neglected)}"
+    data-role="{role}" data-search="{escape((pr['repo'] + ' ' + pr['title'] + ' ' + pr['author']).lower())}">
+  <td>{gh_link(pr['repo'])}</td>
+  <td><a href="{escape(pr['url'])}">#{pr['number']}</a> {escape(pr['title'])}</td>
+  <td>{gh_link(pr['author'])}{' <span class="tag">committer</span>' if pr['authorIsCommitter'] else ''}</td>
+  <td class="nowrap" data-sort="{pr['createdAt']}">{fmt_date(pr['createdAt'])}</td>
+  <td class="num" data-sort="{pr['waitingSeconds']}">{days}</td>
+  <td class="num">{pr['committerComments']}</td>
+  <td class="num">{pr['nonCommitterComments']}</td>
+</tr>""")
+    return "\n".join(rows)
+
+
+def repo_table(first_response, stale_prs):
+    stale = Counter(pr["repo"] for pr in stale_prs)
+    neglected = Counter(pr["repo"] for pr in stale_prs if pr["committerComments"] == 0)
+    rows = []
+    for repo, data in first_response["repos"].items():
+        if data["closedPrCount"] == 0 and not stale[repo]:
+            continue
+        rows.append(f"""<tr>
+  <td>{gh_link(repo)}</td>
+  <td class="num">{data['closedPrCount']}</td>
+  <td class="num">{data['respondedPrCount']}</td>
+  <td class="num" data-sort="{data['medianSeconds'] if data['medianSeconds'] is not None else -1}">{fmt(data['medianSeconds'])}</td>
+  <td class="num" data-sort="{data['averageSeconds'] if data['averageSeconds'] is not None else -1}">{fmt(data['averageSeconds'])}</td>
+  <td class="num">{stale[repo]}</td>
+  <td class="num">{neglected[repo]}</td>
+</tr>""")
+    return "\n".join(rows)
+
+
+def comparison_table(rows):
+    out = []
+    for row in rows:
+        c, n = row["committer"], row["nonCommitter"]
+        cls = ' class="total"' if row["period"] == "All" else ""
+        out.append(f"""<tr{cls}>
+  <td>{escape(row['period'])}</td>
+  <td class="num">{c['prs']}</td><td class="num">{fmt(c['median'])}</td><td class="num">{fmt(c['average'])}</td>
+  <td class="num">{n['prs']}</td><td class="num">{fmt(n['median'])}</td><td class="num">{fmt(n['average'])}</td>
+</tr>""")
+    return "\n".join(out)
+
+
+def percentile_table(times):
+    return "\n".join(
+        f'<tr><td>{p}%</td><td class="num">{fmt(percentile(times, p))}</td></tr>'
+        for p in PERCENTILES
+    )
+
+
+def build():
+    first_response = json.loads(FIRST_RESPONSE_FILE.read_text())
+    stale = json.loads(STALE_FILE.read_text())
+    stale_prs = stale["pullRequests"]
+    prs = load_prs(FIRST_RESPONSE_FILE)
+    committers = set(merge_counts(prs))
+    times = sorted(pr["timeToFirstResponseSeconds"] for pr in prs)
+    overall = first_response["overall"]
+    neglected_count = sum(pr["committerComments"] == 0 for pr in stale_prs)
+    orgs = sorted({repo.split("/")[0] for repo in first_response["repos"]})
+    repos_with_stale = sorted({pr["repo"] for pr in stale_prs})
+    generated = datetime.fromisoformat(stale["generatedAt"]).strftime("%Y-%m-%d")
+    days = stale["minDaysWaiting"]
+
+    cards = "".join([
+        stat_card(len(first_response["repos"]), "repos tracked"),
+        stat_card(f"{overall['respondedPrCount']:,}", "closed PRs with a response"),
+        stat_card(overall["median"], "median time to first response"),
+        stat_card(len(stale_prs), f"open PRs waiting > {days} days"),
+        stat_card(neglected_count, "of those with no committer comments"),
+    ])
+    repo_options = "\n".join(
+        f'<option value="{escape(r)}">{escape(r)}</option>' for r in repos_with_stale)
+
+    html = TEMPLATE.format(
+        generated=generated,
+        orgs=", ".join(gh_link(o) for o in orgs),
+        cards=cards,
+        days=days,
+        repo_options=repo_options,
+        stale_rows=stale_table(stale_prs),
+        repo_rows=repo_table(first_response, stale_prs),
+        comparison_rows=comparison_table(comparison_rows(prs, committers)),
+        committer_count=len(committers),
+        percentile_rows=percentile_table(times),
+        responded=f"{len(times):,}",
+    )
+    SITE_DIR.mkdir(exist_ok=True)
+    (SITE_DIR / "index.html").write_text(html)
+    print(f"Wrote {(SITE_DIR / 'index.html').relative_to(ROOT)}")
+
+
+TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROS PR Watch</title>
+<style>
+:root {{
+  --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0;
+  --surface: #f6f8fa; --accent: #0969da; --tag-bg: #ddf4ff; --tag-fg: #0550ae;
+}}
+@media (prefers-color-scheme: dark) {{
+  :root {{
+    --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --border: #3d444d;
+    --surface: #151b23; --accent: #4493f8; --tag-bg: #12263f; --tag-fg: #79c0ff;
+  }}
+}}
+* {{ box-sizing: border-box; }}
+body {{
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}}
+main {{ max-width: 1200px; margin: 0 auto; padding: 24px 16px 64px; }}
+h1 {{ margin: 0 0 4px; font-size: 28px; }}
+h2 {{ margin: 48px 0 8px; font-size: 21px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }}
+p {{ margin: 8px 0; }}
+.muted {{ color: var(--muted); }}
+a {{ color: var(--accent); text-decoration: none; }}
+a:hover {{ text-decoration: underline; }}
+nav a {{ margin-right: 16px; }}
+.cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 24px 0; }}
+.card {{ background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }}
+.card .value {{ font-size: 24px; font-weight: 600; }}
+.card .label {{ color: var(--muted); font-size: 13px; }}
+.controls {{ display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }}
+.controls input[type=search], .controls select {{
+  font: inherit; padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg); color: var(--fg); max-width: 100%;
+}}
+.table-wrap {{ overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }}
+table {{ border-collapse: collapse; width: 100%; font-size: 14px; }}
+th, td {{ padding: 6px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }}
+tr:last-child td {{ border-bottom: none; }}
+th {{ background: var(--surface); position: sticky; top: 0; white-space: nowrap; }}
+th.sortable {{ cursor: pointer; user-select: none; }}
+th.sortable::after {{ content: " ↕"; color: var(--muted); }}
+th.asc::after {{ content: " ↑"; color: var(--fg); }}
+th.desc::after {{ content: " ↓"; color: var(--fg); }}
+.num {{ text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }}
+tr.total td {{ font-weight: 600; background: var(--surface); }}
+.nowrap {{ white-space: nowrap; }}
+.tag {{ background: var(--tag-bg); color: var(--tag-fg); border-radius: 10px; padding: 0 7px; font-size: 12px; white-space: nowrap; }}
+.scroll {{ max-height: 640px; overflow-y: auto; }}
+#stale-count {{ font-weight: 600; }}
+</style>
+</head>
+<body>
+<main>
+<h1>ROS PR Watch</h1>
+<p class="muted">Pull requests waiting on maintainers in {orgs}. Data collected {generated}.</p>
+<nav><a href="#stale">Waiting PRs</a><a href="#repos">Repos</a><a href="#committers">Committers vs. contributors</a><a href="#distribution">Response times</a><a href="#definitions">Definitions</a></nav>
+
+<div class="cards">{cards}</div>
+
+<h2 id="stale">Open PRs waiting on a response</h2>
+<p>Open, non-draft PRs where the author made the last comment more than {days} days ago.
+By default only PRs with <strong>no comments from any committer</strong> are shown.</p>
+<div class="controls">
+  <label><input type="checkbox" id="only-neglected" checked> No committer comments only</label>
+  <select id="repo-filter" aria-label="Filter by repo"><option value="">All repos</option>
+{repo_options}
+  </select>
+  <select id="role-filter" aria-label="Filter by author">
+    <option value="">All authors</option><option value="contributor">Non-committer authors</option>
+    <option value="committer">Committer authors</option>
+  </select>
+  <input type="search" id="search" placeholder="Search title, author, repo">
+  <span class="muted"><span id="stale-count"></span> PRs shown</span>
+</div>
+<div class="table-wrap scroll">
+<table id="stale-table">
+<thead><tr>
+  <th class="sortable">Repo</th><th class="sortable">Pull request</th><th class="sortable">Author</th>
+  <th class="sortable desc">Opened</th><th class="sortable num">Days<br>waiting</th>
+  <th class="sortable num">Committer<br>comments</th><th class="sortable num">Other<br>comments</th>
+</tr></thead>
+<tbody>
+{stale_rows}
+</tbody>
+</table>
+</div>
+
+<h2 id="repos">Repos</h2>
+<p>Time to first response for closed PRs, and counts of open PRs waiting more than {days} days.</p>
+<div class="table-wrap scroll">
+<table class="sortable-table">
+<thead><tr>
+  <th class="sortable">Repo</th><th class="sortable num">Closed PRs</th><th class="sortable num">With response</th>
+  <th class="sortable num">Median response</th><th class="sortable num">Average response</th>
+  <th class="sortable num">Waiting PRs</th><th class="sortable num">No committer comments</th>
+</tr></thead>
+<tbody>
+{repo_rows}
+</tbody>
+</table>
+</div>
+
+<h2 id="committers">Committers vs. other contributors</h2>
+<p>Time to first response for closed PRs, by the year the PR was opened and whether its author is one of the
+{committer_count} committers.</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th rowspan="2">Year</th><th colspan="3">Committer authors</th><th colspan="3">Other authors</th></tr>
+<tr><th class="num">PRs</th><th class="num">Median</th><th class="num">Average</th>
+    <th class="num">PRs</th><th class="num">Median</th><th class="num">Average</th></tr>
+</thead>
+<tbody>
+{comparison_rows}
+</tbody>
+</table>
+</div>
+
+<h2 id="distribution">How long PRs wait for a first response</h2>
+<p>Share of the {responded} closed PRs that received a first response within each time.</p>
+<div class="table-wrap" style="max-width: 360px">
+<table>
+<thead><tr><th>Percentile</th><th class="num">Responded within</th></tr></thead>
+<tbody>
+{percentile_rows}
+</tbody>
+</table>
+</div>
+
+<h2 id="definitions">Definitions</h2>
+<ul>
+  <li><strong>Response</strong>: a comment or submitted review by someone other than the PR author. Bot comments are ignored.</li>
+  <li><strong>Committer</strong>: anyone who has merged at least one PR in the tracked repos.</li>
+  <li><strong>Waiting PR</strong>: an open, non-draft PR where the author (counting the PR opening) made the last comment more than {days} days ago.</li>
+  <li>PRs authored by bots are excluded. Response-time statistics cover only closed PRs that received a response.</li>
+</ul>
+</main>
+<script>
+(() => {{
+  function cellValue(row, index) {{
+    const cell = row.cells[index];
+    const v = cell.dataset.sort ?? cell.textContent.trim();
+    const n = Number(v);
+    return v !== "" && !isNaN(n) ? n : v.toLowerCase();
+  }}
+  function makeSortable(table) {{
+    const headers = table.tHead.rows[table.tHead.rows.length - 1].cells;
+    Array.from(headers).forEach((th, index) => {{
+      if (!th.classList.contains("sortable")) return;
+      th.addEventListener("click", () => {{
+        const asc = !th.classList.contains("asc");
+        Array.from(headers).forEach(h => h.classList.remove("asc", "desc"));
+        th.classList.add(asc ? "asc" : "desc");
+        const body = table.tBodies[0];
+        const rows = Array.from(body.rows);
+        rows.sort((a, b) => {{
+          const x = cellValue(a, index), y = cellValue(b, index);
+          return (x < y ? -1 : x > y ? 1 : 0) * (asc ? 1 : -1);
+        }});
+        rows.forEach(r => body.appendChild(r));
+      }});
+    }});
+  }}
+  document.querySelectorAll("#stale-table, .sortable-table").forEach(makeSortable);
+
+  const onlyNeglected = document.getElementById("only-neglected");
+  const repoFilter = document.getElementById("repo-filter");
+  const roleFilter = document.getElementById("role-filter");
+  const search = document.getElementById("search");
+  const count = document.getElementById("stale-count");
+  function applyFilters() {{
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+    document.querySelectorAll("#stale-table tbody tr").forEach(row => {{
+      const visible = (!onlyNeglected.checked || row.dataset.neglected === "1")
+        && (!repoFilter.value || row.dataset.repo === repoFilter.value)
+        && (!roleFilter.value || row.dataset.role === roleFilter.value)
+        && (!q || row.dataset.search.includes(q));
+      row.hidden = !visible;
+      if (visible) shown++;
+    }});
+    count.textContent = shown;
+  }}
+  [onlyNeglected, repoFilter, roleFilter].forEach(el => el.addEventListener("change", applyFilters));
+  search.addEventListener("input", applyFilters);
+  applyFilters();
+}})();
+</script>
+</body>
+</html>
+"""
+
+
+if __name__ == "__main__":
+    build()

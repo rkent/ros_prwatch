@@ -38,6 +38,7 @@ All output is written to `artifacts/`.
 | `committers.py` | (prints) | Lists committers with merge counts, compares time to first response for committer and non-committer authors by year, and shows the distribution of response times in 100 equal-size buckets. |
 | `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than 30 days (`--days N` to change). |
 | `neglected_repos.py` | (prints) | Lists repos whose stale PRs have no comments from committers. |
+| `build_site.py` | `_site/index.html` | Builds a static website of the results, with links to each waiting PR. |
 
 Example:
 
@@ -47,6 +48,7 @@ Example:
 .venv/bin/python committers.py
 .venv/bin/python stale_prs.py
 .venv/bin/python neglected_repos.py
+.venv/bin/python build_site.py
 ```
 
 `first_response.py` and `stale_prs.py` accept `--limit N` to process only the
