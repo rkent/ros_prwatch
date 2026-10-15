@@ -10,16 +10,17 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-import requests
 from dotenv import load_dotenv
+
+from first_response import GitHub
 
 ROOT = Path(__file__).resolve().parent
 ORGS_FILE = ROOT / "orgs.txt"
 OUTPUT_FILE = ROOT / "artifacts" / "repos.json"
-GRAPHQL_URL = "https://api.github.com/graphql"
 
 QUERY = """
 query($org: String!, $cursor: String) {
+  rateLimit { remaining resetAt }
   organization(login: $org) {
     repositories(first: 100, after: $cursor, orderBy: {field: NAME, direction: ASC}) {
       pageInfo { hasNextPage endCursor }
@@ -44,20 +45,11 @@ def read_orgs(path):
         return [line.strip() for line in f if line.strip() and not line.startswith("#")]
 
 
-def graphql(session, query, variables):
-    resp = session.post(GRAPHQL_URL, json={"query": query, "variables": variables})
-    resp.raise_for_status()
-    data = resp.json()
-    if "errors" in data:
-        raise RuntimeError(f"GraphQL errors: {data['errors']}")
-    return data["data"]
-
-
-def list_org_repos(session, org):
+def list_org_repos(gh, org):
     repos = []
     cursor = None
     while True:
-        data = graphql(session, QUERY, {"org": org, "cursor": cursor})
+        data = gh.query(QUERY, {"org": org, "cursor": cursor})
         if data["organization"] is None:
             raise RuntimeError(f"Organization not found: {org}")
         conn = data["organization"]["repositories"]
@@ -86,15 +78,14 @@ def main():
     if not token:
         sys.exit("GITHUB_TOKEN not set (expected in .env)")
 
-    session = requests.Session()
-    session.headers["Authorization"] = f"Bearer {token}"
+    gh = GitHub(token)
 
     result = {
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "orgs": {},
     }
     for org in read_orgs(ORGS_FILE):
-        repos = list_org_repos(session, org)
+        repos = list_org_repos(gh, org)
         result["orgs"][org] = repos
         print(f"{org}: {len(repos)} non-archived repos")
 

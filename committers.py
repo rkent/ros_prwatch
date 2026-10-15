@@ -19,6 +19,10 @@ from first_response import OUTPUT_FILE, ROOT, format_duration
 BOT_LOGINS = {"mergify", "dependabot", "github-actions"}
 
 
+# login_of() maps every deleted account to this login, so it is not one person.
+DELETED_LOGIN = "ghost"
+
+
 def is_bot_login(login):
     return login in BOT_LOGINS or login.endswith("[bot]")
 
@@ -32,6 +36,7 @@ def merge_counts(prs):
     return Counter(
         pr["mergedBy"] for pr in prs
         if pr.get("mergedBy") and not is_bot_login(pr["mergedBy"])
+        and pr["mergedBy"] != DELETED_LOGIN
     )
 
 

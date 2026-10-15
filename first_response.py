@@ -110,12 +110,21 @@ def is_bot(actor):
     )
 
 
+# GraphQL error types that retrying cannot fix.
+PERMANENT_ERROR_TYPES = {"NOT_FOUND", "FORBIDDEN", "INSUFFICIENT_SCOPES"}
+
+
+class PermanentQueryError(RuntimeError):
+    """A query failed in a way that retrying will not fix (e.g. repo not found)."""
+
+
 class GitHub:
     def __init__(self, token):
         self.session = requests.Session()
         self.session.headers["Authorization"] = f"Bearer {token}"
 
     def query(self, query, variables, retries=5):
+        err = None
         for attempt in range(retries):
             try:
                 resp = self.session.post(
@@ -130,8 +139,11 @@ class GitHub:
                         self._throttle(data["data"]["rateLimit"])
                         return data["data"]
                     err = f"GraphQL errors: {data['errors']}"
+                    if all(e.get("type") in PERMANENT_ERROR_TYPES for e in data["errors"]):
+                        raise PermanentQueryError(err)
                 elif resp.status_code in (403, 429) and "retry-after" in resp.headers:
                     wait = int(resp.headers["retry-after"])
+                    err = f"secondary rate limit (HTTP {resp.status_code})"
                     print(f"  secondary rate limit, sleeping {wait}s", file=sys.stderr)
                     time.sleep(wait)
                     continue
@@ -158,7 +170,12 @@ def first_response_in(items, author_login):
         login = login_of(actor)
         if login == author_login or is_bot(actor):
             continue
-        ts = item.get("submittedAt") or item["createdAt"]
+        if item["__typename"] == "PullRequestReview":
+            ts = item["submittedAt"]
+            if ts is None:  # pending review, not visible to the author
+                continue
+        else:
+            ts = item["createdAt"]
         if best is None or ts < best[0]:
             best = (ts, login)
     return best
@@ -201,6 +218,8 @@ def process_repo(gh, owner, name):
     cursor = None
     while True:
         data = gh.query(PRS_QUERY, {"owner": owner, "name": name, "cursor": cursor})
+        if data["repository"] is None:
+            raise PermanentQueryError(f"Repository not found: {owner}/{name}")
         conn = data["repository"]["pullRequests"]
         for pr in conn["nodes"]:
             if is_bot(pr["author"]):
@@ -271,7 +290,11 @@ def main():
     repos = {}
     for full_name in all_repos:
         owner, name = full_name.split("/")
-        result = process_repo(gh, owner, name)
+        try:
+            result = process_repo(gh, owner, name)
+        except PermanentQueryError as e:
+            print(f"{full_name}: skipped ({e})", file=sys.stderr)
+            continue
         repos[full_name] = result
         print(f"{full_name}: {result['respondedPrCount']}/{result['closedPrCount']} "
               f"responded, median {result['median']}")

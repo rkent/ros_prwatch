@@ -94,6 +94,8 @@ def comparison_table(rows):
 
 
 def percentile_table(times):
+    if not times:
+        return '<tr><td colspan="2" class="muted">No closed PRs with a response</td></tr>'
     return "\n".join(
         f'<tr><td>{p}%</td><td class="num">{fmt(percentile(times, p))}</td></tr>'
         for p in PERCENTILES
@@ -117,7 +119,7 @@ def build():
     cards = "".join([
         stat_card(len(first_response["repos"]), "repos tracked"),
         stat_card(f"{overall['respondedPrCount']:,}", "closed PRs with a response"),
-        stat_card(overall["median"], "median time to first response"),
+        stat_card(fmt(overall["medianSeconds"]), "median time to first response"),
         stat_card(len(stale_prs), f"open PRs waiting > {days} days"),
         stat_card(neglected_count, "of those with no committer comments"),
     ])

@@ -28,6 +28,7 @@ from first_response import (
     REPOS_FILE,
     ROOT,
     GitHub,
+    PermanentQueryError,
     format_duration,
     is_bot,
     login_of,
@@ -103,6 +104,9 @@ def check_pr(gh, owner, name, pr, committers, cutoff, now):
     """Return a stale-PR record, or None if the PR doesn't qualify."""
     if pr["isDraft"] or is_bot(pr["author"]):
         return None
+    # The last comment can't predate the opening, so newer PRs can't qualify.
+    if parse_time(pr["createdAt"]) > cutoff:
+        return None
     author = login_of(pr["author"])
 
     # Opening the PR counts as the author's first comment.
@@ -142,6 +146,8 @@ def process_repo(gh, owner, name, committers, cutoff, now):
     cursor = None
     while True:
         data = gh.query(OPEN_PRS_QUERY, {"owner": owner, "name": name, "cursor": cursor})
+        if data["repository"] is None:
+            raise PermanentQueryError(f"Repository not found: {owner}/{name}")
         conn = data["repository"]["pullRequests"]
         for pr in conn["nodes"]:
             record = check_pr(gh, owner, name, pr, committers, cutoff, now)
@@ -184,7 +190,11 @@ def main():
     stale = []
     for full_name in all_repos:
         owner, name = full_name.split("/")
-        repo_stale = process_repo(gh, owner, name, committers, cutoff, now)
+        try:
+            repo_stale = process_repo(gh, owner, name, committers, cutoff, now)
+        except PermanentQueryError as e:
+            print(f"{full_name}: skipped ({e})", file=sys.stderr)
+            continue
         stale.extend(repo_stale)
         if repo_stale:
             print(f"{full_name}: {len(repo_stale)} stale PRs")
