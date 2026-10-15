@@ -3,4 +3,4 @@
 __pycache__/
 artifacts/*
 !artifacts/first_response_summary.json
-_site/
+docs/

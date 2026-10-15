@@ -1,0 +1,55 @@
+# Rebuild the website daily (and on request) and commit it to the gh-pages
+# branch, which GitHub Pages serves.
+#
+# Uses the committed artifacts/first_response_summary.json; the slow
+# first_response.py collection is run manually and its summary committed.
+#
+# Setup:
+#   - Add a repository secret PRWATCH_TOKEN holding a GitHub token that can
+#     read public repositories (no scopes needed).
+#   - Run this workflow once to create the gh-pages branch, then set
+#     Settings > Pages > Build and deployment > Source: Deploy from a branch,
+#     branch gh-pages, folder /docs.
+
+name: Build site
+
+on:
+  schedule:
+    - cron: "17 6 * * *"  # daily at 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write  # push to gh-pages
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Build site
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRWATCH_TOKEN }}
+        run: ./build.sh
+
+      # Replace gh-pages with a single fresh commit each run, so the branch
+      # never accumulates history.
+      - name: Publish docs/ to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git worktree add --orphan -b gh-pages pages
+          cp -r docs pages/docs
+          cd pages
+          git add -A
+          git commit -m "Rebuild site $(date -u +%Y-%m-%d)"
+          git push --force origin gh-pages

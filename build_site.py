@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build a static website of the results in _site/.
+"""Build a static website of the results in docs/.
 
 Reads artifacts/repos.json, artifacts/first_response_summary.json and
 artifacts/stale_prs.json, and writes a single self-contained page,
-_site/index.html. It does not need the full first_response.json.
+docs/index.html. It does not need the full first_response.json.
 """
 
 import json
@@ -16,7 +16,7 @@ from first_response import REPOS_FILE, ROOT, format_duration
 from stale_prs import OUTPUT_FILE as STALE_FILE
 from summarize_first_response import load_summary
 
-SITE_DIR = ROOT / "_site"
+SITE_DIR = ROOT / "docs"
 
 
 def fmt(seconds):
@@ -140,6 +140,8 @@ def build():
     )
     SITE_DIR.mkdir(exist_ok=True)
     (SITE_DIR / "index.html").write_text(html)
+    # Tell GitHub Pages to serve the files as-is instead of running Jekyll.
+    (SITE_DIR / ".nojekyll").touch()
     print(f"Wrote {(SITE_DIR / 'index.html').relative_to(ROOT)}")
 
 

@@ -44,7 +44,7 @@ The data comes in two parts that are refreshed on different schedules:
    ```
 
 2. **Open PRs and the website (regular).** `build.sh` refreshes the repo list
-   and open-PR data and rebuilds the site in `_site/` (a few minutes; creates
+   and open-PR data and rebuilds the site in `docs/` (a few minutes; creates
    the venv if needed). It uses the saved summary and never reads
    `first_response.json`.
 
@@ -52,6 +52,22 @@ The data comes in two parts that are refreshed on different schedules:
    ./build.sh            # default waiting-PR threshold (see stale_prs.py --help)
    ./build.sh --days 30  # or choose a different threshold
    ```
+
+## Automatic daily rebuild
+
+`.github/workflows/build-site.yml` runs `build.sh` daily at 06:17 UTC (and on
+demand from the Actions tab) and commits the built `docs/` folder to the
+`gh-pages` branch, which GitHub Pages serves. To set it up:
+
+1. Add a repository secret named `PRWATCH_TOKEN` containing a GitHub token that
+   can read public repositories (a classic token with no scopes is enough).
+2. Run the workflow once (Actions → Build site → Run workflow) to create the
+   `gh-pages` branch.
+3. Under **Settings → Pages → Build and deployment**, set **Source** to
+   **Deploy from a branch**, branch `gh-pages`, folder `/docs`.
+
+The workflow uses the committed `artifacts/first_response_summary.json`, so
+commit a new summary after each manual `first_response.py` run.
 
 ## Scripts
 
@@ -66,7 +82,7 @@ Each step reads the output of the earlier ones. All output is written to
 | `committers.py` | (prints) | Reads `first_response.json`. Lists committers with merge counts, compares time to first response for committer and non-committer authors by year, and shows the distribution of response times in 100 equal-size buckets. |
 | `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than a threshold number of days (`--days N`; see `--help` for the default). |
 | `neglected_repos.py` | (prints) | Lists repos whose stale PRs have no comments from committers. |
-| `build_site.py` | `_site/index.html` | Builds a static website from `repos.json`, the summary and `stale_prs.json`, with links to each waiting PR. |
+| `build_site.py` | `docs/index.html` | Builds a static website from `repos.json`, the summary and `stale_prs.json`, with links to each waiting PR. |
 
 Example:
 

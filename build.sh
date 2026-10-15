@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Refresh the open-PR data from GitHub and rebuild the website in _site/.
+# Refresh the open-PR data from GitHub and rebuild the website in docs/.
 #
 # Usage: ./build.sh [--days N]
 #
 #   --days N   list open PRs whose author has waited more than N days for a
 #              response (default: see `stale_prs.py --help`)
 #
-# Requires a .env file containing GITHUB_TOKEN, orgs.txt listing the
+# Requires GITHUB_TOKEN (in .env or the environment), orgs.txt listing the
 # organizations to examine, and artifacts/first_response_summary.json. The
 # summary comes from the slow closed-PR collection, which is run manually:
 #   .venv/bin/python first_response.py
@@ -48,8 +48,8 @@ done
 
 cd "$(dirname "$0")"
 
-if [[ ! -f .env ]]; then
-  echo "Missing .env (it must contain GITHUB_TOKEN=...)" >&2
+if [[ ! -f .env && -z "${GITHUB_TOKEN:-}" ]]; then
+  echo "Set GITHUB_TOKEN in the environment or in .env (GITHUB_TOKEN=...)" >&2
   exit 1
 fi
 
