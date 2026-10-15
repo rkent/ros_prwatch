@@ -32,7 +32,8 @@ To collect all data and build the site in `_site/` in one step (about 25
 minutes; creates the venv if needed):
 
 ```bash
-./build.sh
+./build.sh            # waiting PRs: author's last comment over 10 days ago
+./build.sh --days 30  # or choose a different threshold
 ```
 
 ## Scripts
@@ -45,7 +46,7 @@ All output is written to `artifacts/`.
 | `list_repos.py` | `repos.json` | Lists the non-archived repos in each organization. |
 | `first_response.py` | `first_response.json` | For every closed PR, finds the first response by someone other than the author, and computes median and average time to first response per repo and overall. |
 | `committers.py` | (prints) | Lists committers with merge counts, compares time to first response for committer and non-committer authors by year, and shows the distribution of response times in 100 equal-size buckets. |
-| `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than 30 days (`--days N` to change). |
+| `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than 10 days (`--days N` to change). |
 | `neglected_repos.py` | (prints) | Lists repos whose stale PRs have no comments from committers. |
 | `build_site.py` | `_site/index.html` | Builds a static website of the results, with links to each waiting PR. |
 
@@ -77,7 +78,7 @@ results are not overwritten.
 - **Committer**: anyone who merged at least one PR in `first_response.json`,
   across all examined repos.
 - **Stale PR**: an open, non-draft PR where the author (including by opening
-  the PR) made the last comment more than 30 days ago.
+  the PR) made the last comment more than 10 days ago (configurable).
 
 ## Caveats
 

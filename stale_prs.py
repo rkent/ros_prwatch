@@ -36,6 +36,7 @@ from first_response import (
 
 OUTPUT_FILE = ROOT / "artifacts" / "stale_prs.json"
 TEST_OUTPUT_FILE = ROOT / "artifacts" / "stale_prs_test.json"
+DEFAULT_DAYS = 10
 
 ACTIVITY_FIELDS = """
   pageInfo { hasNextPage endCursor }
@@ -153,8 +154,9 @@ def process_repo(gh, owner, name, committers, cutoff, now):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("--days", type=int, default=30,
-                        help="minimum days since the author's last comment (default: 30)")
+    parser.add_argument("--days", type=int, default=DEFAULT_DAYS,
+                        help="minimum days since the author's last comment "
+                             f"(default: {DEFAULT_DAYS})")
     parser.add_argument("--limit", type=int, metavar="N",
                         help="process only the first N repos (writes to "
                              f"{TEST_OUTPUT_FILE.relative_to(ROOT)})")
