@@ -2,7 +2,7 @@
 """List open PRs where the author spoke last and has waited over N days.
 
 Reads the repo list from artifacts/repos.json and the committer list from
-artifacts/first_response.json (anyone who merged a PR there). Writes
+artifacts/first_response_summary.json (anyone who merged a closed PR). Writes
 artifacts/stale_prs.json.
 
 "Comments" are issue comments and submitted reviews (a review with inline
@@ -22,9 +22,7 @@ from datetime import datetime, timedelta, timezone
 
 from dotenv import load_dotenv
 
-from committers import load_prs, merge_counts
 from first_response import (
-    OUTPUT_FILE as FIRST_RESPONSE_FILE,
     REPOS_FILE,
     ROOT,
     GitHub,
@@ -34,6 +32,7 @@ from first_response import (
     login_of,
     parse_time,
 )
+from summarize_first_response import load_summary
 
 OUTPUT_FILE = ROOT / "artifacts" / "stale_prs.json"
 TEST_OUTPUT_FILE = ROOT / "artifacts" / "stale_prs_test.json"
@@ -173,12 +172,11 @@ def main():
     token = os.environ.get("GITHUB_TOKEN")
     if not token:
         sys.exit("GITHUB_TOKEN not set (expected in .env)")
-    for path in (REPOS_FILE, FIRST_RESPONSE_FILE):
-        if not path.exists():
-            sys.exit(f"{path.relative_to(ROOT)} not found")
+    if not REPOS_FILE.exists():
+        sys.exit(f"{REPOS_FILE.relative_to(ROOT)} not found; run list_repos.py first")
 
     gh = GitHub(token)
-    committers = set(merge_counts(load_prs(FIRST_RESPONSE_FILE)))
+    committers = set(load_summary()["committers"])
     repo_list = json.loads(REPOS_FILE.read_text())
     all_repos = [r["nameWithOwner"] for org_repos in repo_list["orgs"].values()
                  for r in org_repos]

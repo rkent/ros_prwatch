@@ -1,0 +1,2574 @@
+{
+  "generatedAt": "2026-10-15T16:44:33+00:00",
+  "sourceGeneratedAt": "2026-10-14T22:30:09+00:00",
+  "overall": {
+    "closedPrCount": 33771,
+    "respondedPrCount": 30115,
+    "botPrCount": 8909,
+    "medianSeconds": 20257,
+    "averageSeconds": 1054334
+  },
+  "repos": {
+    "ros2/.github": {
+      "closedPrCount": 10,
+      "respondedPrCount": 10,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 4529,
+      "averageSeconds": 23107
+    },
+    "ros2/ament_cmake_ros": {
+      "closedPrCount": 55,
+      "respondedPrCount": 51,
+      "noResponsePrCount": 4,
+      "botPrCount": 9,
+      "medianSeconds": 7602,
+      "averageSeconds": 134045
+    },
+    "ros2/apex_rostest": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/buildfarm_perf_tests": {
+      "closedPrCount": 99,
+      "respondedPrCount": 93,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 4984,
+      "averageSeconds": 176893
+    },
+    "ros2/cartographer": {
+      "closedPrCount": 14,
+      "respondedPrCount": 10,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 8802,
+      "averageSeconds": 2367973
+    },
+    "ros2/cartographer_ros": {
+      "closedPrCount": 44,
+      "respondedPrCount": 32,
+      "noResponsePrCount": 12,
+      "botPrCount": 1,
+      "medianSeconds": 16778,
+      "averageSeconds": 1858418
+    },
+    "ros2/choco-packages": {
+      "closedPrCount": 11,
+      "respondedPrCount": 7,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 259992,
+      "averageSeconds": 520562
+    },
+    "ros2/ci": {
+      "closedPrCount": 789,
+      "respondedPrCount": 750,
+      "noResponsePrCount": 39,
+      "botPrCount": 0,
+      "medianSeconds": 3934,
+      "averageSeconds": 849817
+    },
+    "ros2/common_interfaces": {
+      "closedPrCount": 204,
+      "respondedPrCount": 192,
+      "noResponsePrCount": 12,
+      "botPrCount": 21,
+      "medianSeconds": 13900,
+      "averageSeconds": 232076
+    },
+    "ros2/console_bridge_vendor": {
+      "closedPrCount": 38,
+      "respondedPrCount": 37,
+      "noResponsePrCount": 1,
+      "botPrCount": 3,
+      "medianSeconds": 19720,
+      "averageSeconds": 196105
+    },
+    "ros2/cookbook": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 942,
+      "averageSeconds": 942
+    },
+    "ros2/darknet_vendor": {
+      "closedPrCount": 5,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/demos": {
+      "closedPrCount": 573,
+      "respondedPrCount": 524,
+      "noResponsePrCount": 49,
+      "botPrCount": 66,
+      "medianSeconds": 8613,
+      "averageSeconds": 693070
+    },
+    "ros2/design": {
+      "closedPrCount": 258,
+      "respondedPrCount": 236,
+      "noResponsePrCount": 22,
+      "botPrCount": 0,
+      "medianSeconds": 8810,
+      "averageSeconds": 566230
+    },
+    "ros2/detection_visualizer": {
+      "closedPrCount": 6,
+      "respondedPrCount": 5,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 12269,
+      "averageSeconds": 125315
+    },
+    "ros2/domain_bridge": {
+      "closedPrCount": 57,
+      "respondedPrCount": 55,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 20910,
+      "averageSeconds": 203653
+    },
+    "ros2/eigen3_cmake_module": {
+      "closedPrCount": 8,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 0,
+      "botPrCount": 2,
+      "medianSeconds": 62776,
+      "averageSeconds": 70913
+    },
+    "ros2/examples": {
+      "closedPrCount": 315,
+      "respondedPrCount": 278,
+      "noResponsePrCount": 37,
+      "botPrCount": 23,
+      "medianSeconds": 8422,
+      "averageSeconds": 515556
+    },
+    "ros2/example_interfaces": {
+      "closedPrCount": 23,
+      "respondedPrCount": 22,
+      "noResponsePrCount": 1,
+      "botPrCount": 2,
+      "medianSeconds": 18523,
+      "averageSeconds": 111660
+    },
+    "ros2/geometry2": {
+      "closedPrCount": 566,
+      "respondedPrCount": 543,
+      "noResponsePrCount": 23,
+      "botPrCount": 145,
+      "medianSeconds": 28096,
+      "averageSeconds": 497320
+    },
+    "ros2/kilted_tutorial_party": {
+      "closedPrCount": 3,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 584,
+      "averageSeconds": 8771
+    },
+    "ros2/launch": {
+      "closedPrCount": 571,
+      "respondedPrCount": 547,
+      "noResponsePrCount": 24,
+      "botPrCount": 71,
+      "medianSeconds": 20258,
+      "averageSeconds": 773307
+    },
+    "ros2/launch_ros": {
+      "closedPrCount": 310,
+      "respondedPrCount": 303,
+      "noResponsePrCount": 7,
+      "botPrCount": 60,
+      "medianSeconds": 20045,
+      "averageSeconds": 454997
+    },
+    "ros2/libyaml_vendor": {
+      "closedPrCount": 53,
+      "respondedPrCount": 50,
+      "noResponsePrCount": 3,
+      "botPrCount": 1,
+      "medianSeconds": 32871,
+      "averageSeconds": 622866
+    },
+    "ros2/lyrical_tutorial_party_old": {
+      "closedPrCount": 4,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 150,
+      "averageSeconds": 150
+    },
+    "ros2/message_filters": {
+      "closedPrCount": 177,
+      "respondedPrCount": 176,
+      "noResponsePrCount": 1,
+      "botPrCount": 82,
+      "medianSeconds": 34644,
+      "averageSeconds": 1883823
+    },
+    "ros2/Mimick": {
+      "closedPrCount": 33,
+      "respondedPrCount": 32,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 423323,
+      "averageSeconds": 3849742
+    },
+    "ros2/mimick_vendor": {
+      "closedPrCount": 34,
+      "respondedPrCount": 31,
+      "noResponsePrCount": 3,
+      "botPrCount": 2,
+      "medianSeconds": 24234,
+      "averageSeconds": 243348
+    },
+    "ros2/netperf": {
+      "closedPrCount": 5,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 34571,
+      "averageSeconds": 394905
+    },
+    "ros2/openrobotics_darknet_ros": {
+      "closedPrCount": 5,
+      "respondedPrCount": 2,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 105490,
+      "averageSeconds": 105490
+    },
+    "ros2/orocos_kdl_vendor": {
+      "closedPrCount": 27,
+      "respondedPrCount": 25,
+      "noResponsePrCount": 2,
+      "botPrCount": 8,
+      "medianSeconds": 12326,
+      "averageSeconds": 1669671
+    },
+    "ros2/orocos_kinematics_dynamics": {
+      "closedPrCount": 26,
+      "respondedPrCount": 24,
+      "noResponsePrCount": 2,
+      "botPrCount": 2,
+      "medianSeconds": 57031,
+      "averageSeconds": 956301
+    },
+    "ros2/performance_test": {
+      "closedPrCount": 45,
+      "respondedPrCount": 40,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 22177,
+      "averageSeconds": 1785317
+    },
+    "ros2/performance_test_fixture": {
+      "closedPrCount": 27,
+      "respondedPrCount": 26,
+      "noResponsePrCount": 1,
+      "botPrCount": 4,
+      "medianSeconds": 8779,
+      "averageSeconds": 226005
+    },
+    "ros2/pmc_scripts": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 77647,
+      "averageSeconds": 77647
+    },
+    "ros2/pybind11_vendor": {
+      "closedPrCount": 22,
+      "respondedPrCount": 22,
+      "noResponsePrCount": 0,
+      "botPrCount": 3,
+      "medianSeconds": 12702,
+      "averageSeconds": 812755
+    },
+    "ros2/python_cmake_module": {
+      "closedPrCount": 10,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 7777,
+      "averageSeconds": 8342976
+    },
+    "ros2/rcl": {
+      "closedPrCount": 1013,
+      "respondedPrCount": 974,
+      "noResponsePrCount": 39,
+      "botPrCount": 69,
+      "medianSeconds": 15946,
+      "averageSeconds": 584901
+    },
+    "ros2/rclc": {
+      "closedPrCount": 227,
+      "respondedPrCount": 200,
+      "noResponsePrCount": 27,
+      "botPrCount": 108,
+      "medianSeconds": 1980,
+      "averageSeconds": 1094845
+    },
+    "ros2/rclcpp": {
+      "closedPrCount": 2005,
+      "respondedPrCount": 1919,
+      "noResponsePrCount": 86,
+      "botPrCount": 274,
+      "medianSeconds": 16267,
+      "averageSeconds": 394375
+    },
+    "ros2/rclpy": {
+      "closedPrCount": 1088,
+      "respondedPrCount": 1022,
+      "noResponsePrCount": 66,
+      "botPrCount": 158,
+      "medianSeconds": 28310,
+      "averageSeconds": 503452
+    },
+    "ros2/rcl_content_filter_fallback": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 17277598,
+      "averageSeconds": 17277598
+    },
+    "ros2/rcl_interfaces": {
+      "closedPrCount": 136,
+      "respondedPrCount": 127,
+      "noResponsePrCount": 9,
+      "botPrCount": 13,
+      "medianSeconds": 17000,
+      "averageSeconds": 604518
+    },
+    "ros2/rcl_logging": {
+      "closedPrCount": 105,
+      "respondedPrCount": 103,
+      "noResponsePrCount": 2,
+      "botPrCount": 7,
+      "medianSeconds": 19221,
+      "averageSeconds": 387302
+    },
+    "ros2/rcpputils": {
+      "closedPrCount": 176,
+      "respondedPrCount": 172,
+      "noResponsePrCount": 4,
+      "botPrCount": 20,
+      "medianSeconds": 4577,
+      "averageSeconds": 45349
+    },
+    "ros2/rcutils": {
+      "closedPrCount": 430,
+      "respondedPrCount": 414,
+      "noResponsePrCount": 16,
+      "botPrCount": 64,
+      "medianSeconds": 10944,
+      "averageSeconds": 290503
+    },
+    "ros2/realtime_support": {
+      "closedPrCount": 125,
+      "respondedPrCount": 111,
+      "noResponsePrCount": 14,
+      "botPrCount": 5,
+      "medianSeconds": 6528,
+      "averageSeconds": 128841
+    },
+    "ros2/release-tracking": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/resource_retriever_service": {
+      "closedPrCount": 25,
+      "respondedPrCount": 25,
+      "noResponsePrCount": 0,
+      "botPrCount": 1,
+      "medianSeconds": 4216,
+      "averageSeconds": 184021
+    },
+    "ros2/rmw": {
+      "closedPrCount": 339,
+      "respondedPrCount": 314,
+      "noResponsePrCount": 25,
+      "botPrCount": 15,
+      "medianSeconds": 14170,
+      "averageSeconds": 751781
+    },
+    "ros2/rmw_connextdds": {
+      "closedPrCount": 158,
+      "respondedPrCount": 136,
+      "noResponsePrCount": 22,
+      "botPrCount": 30,
+      "medianSeconds": 40590,
+      "averageSeconds": 821551
+    },
+    "ros2/rmw_cyclonedds": {
+      "closedPrCount": 357,
+      "respondedPrCount": 304,
+      "noResponsePrCount": 53,
+      "botPrCount": 32,
+      "medianSeconds": 29846,
+      "averageSeconds": 854789
+    },
+    "ros2/rmw_dds_common": {
+      "closedPrCount": 79,
+      "respondedPrCount": 76,
+      "noResponsePrCount": 3,
+      "botPrCount": 4,
+      "medianSeconds": 36116,
+      "averageSeconds": 460130
+    },
+    "ros2/rmw_dps": {
+      "closedPrCount": 27,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 9,
+      "botPrCount": 0,
+      "medianSeconds": 61378,
+      "averageSeconds": 150482
+    },
+    "ros2/rmw_fastrtps": {
+      "closedPrCount": 581,
+      "respondedPrCount": 531,
+      "noResponsePrCount": 50,
+      "botPrCount": 55,
+      "medianSeconds": 22495,
+      "averageSeconds": 445067
+    },
+    "ros2/rmw_gurumdds": {
+      "closedPrCount": 19,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 16,
+      "botPrCount": 0,
+      "medianSeconds": 84,
+      "averageSeconds": 3613
+    },
+    "ros2/rmw_iceoryx": {
+      "closedPrCount": 60,
+      "respondedPrCount": 52,
+      "noResponsePrCount": 8,
+      "botPrCount": 0,
+      "medianSeconds": 76013,
+      "averageSeconds": 1219660
+    },
+    "ros2/rmw_implementation": {
+      "closedPrCount": 243,
+      "respondedPrCount": 231,
+      "noResponsePrCount": 12,
+      "botPrCount": 27,
+      "medianSeconds": 18330,
+      "averageSeconds": 657183
+    },
+    "ros2/rmw_zenoh": {
+      "closedPrCount": 441,
+      "respondedPrCount": 402,
+      "noResponsePrCount": 39,
+      "botPrCount": 334,
+      "medianSeconds": 17362,
+      "averageSeconds": 623500
+    },
+    "ros2/ros1_bridge": {
+      "closedPrCount": 239,
+      "respondedPrCount": 209,
+      "noResponsePrCount": 30,
+      "botPrCount": 0,
+      "medianSeconds": 6979,
+      "averageSeconds": 206912
+    },
+    "ros2/ros2": {
+      "closedPrCount": 616,
+      "respondedPrCount": 572,
+      "noResponsePrCount": 44,
+      "botPrCount": 23,
+      "medianSeconds": 6776,
+      "averageSeconds": 322554
+    },
+    "ros2/ros2-benchmark-container": {
+      "closedPrCount": 7,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 7,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/ros2-performance": {
+      "closedPrCount": 6,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/ros2.github.io": {
+      "closedPrCount": 3,
+      "respondedPrCount": 2,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 426,
+      "averageSeconds": 426
+    },
+    "ros2/ros2cli": {
+      "closedPrCount": 721,
+      "respondedPrCount": 696,
+      "noResponsePrCount": 25,
+      "botPrCount": 155,
+      "medianSeconds": 12742,
+      "averageSeconds": 304421
+    },
+    "ros2/ros2cli_common_extensions": {
+      "closedPrCount": 13,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 0,
+      "botPrCount": 5,
+      "medianSeconds": 39409,
+      "averageSeconds": 174437
+    },
+    "ros2/ros2_dds_profiles_examples": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/ros2_documentation": {
+      "closedPrCount": 2904,
+      "respondedPrCount": 2734,
+      "noResponsePrCount": 170,
+      "botPrCount": 3706,
+      "medianSeconds": 10803,
+      "averageSeconds": 200140
+    },
+    "ros2/ros2_generate_interface_docs": {
+      "closedPrCount": 17,
+      "respondedPrCount": 16,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 36410,
+      "averageSeconds": 45652
+    },
+    "ros2/ros2_tracing": {
+      "closedPrCount": 168,
+      "respondedPrCount": 154,
+      "noResponsePrCount": 14,
+      "botPrCount": 27,
+      "medianSeconds": 31998,
+      "averageSeconds": 509376
+    },
+    "ros2/rosbag2": {
+      "closedPrCount": 1354,
+      "respondedPrCount": 1255,
+      "noResponsePrCount": 99,
+      "botPrCount": 371,
+      "medianSeconds": 34317,
+      "averageSeconds": 405661
+    },
+    "ros2/rosbag2_bag_v2": {
+      "closedPrCount": 32,
+      "respondedPrCount": 26,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 2532,
+      "averageSeconds": 60092
+    },
+    "ros2/rosidl": {
+      "closedPrCount": 664,
+      "respondedPrCount": 622,
+      "noResponsePrCount": 42,
+      "botPrCount": 56,
+      "medianSeconds": 17964,
+      "averageSeconds": 621292
+    },
+    "ros2/rosidl_buffer_backends": {
+      "closedPrCount": 8,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 178521,
+      "averageSeconds": 188350
+    },
+    "ros2/rosidl_buffer_backends_tutorials": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 291342,
+      "averageSeconds": 291342
+    },
+    "ros2/rosidl_core": {
+      "closedPrCount": 13,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 0,
+      "botPrCount": 1,
+      "medianSeconds": 337198,
+      "averageSeconds": 1128863
+    },
+    "ros2/rosidl_dds": {
+      "closedPrCount": 58,
+      "respondedPrCount": 52,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 6280,
+      "averageSeconds": 1167286
+    },
+    "ros2/rosidl_defaults": {
+      "closedPrCount": 28,
+      "respondedPrCount": 27,
+      "noResponsePrCount": 1,
+      "botPrCount": 2,
+      "medianSeconds": 3639,
+      "averageSeconds": 255773
+    },
+    "ros2/rosidl_dynamic_typesupport": {
+      "closedPrCount": 13,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 0,
+      "botPrCount": 2,
+      "medianSeconds": 35567,
+      "averageSeconds": 337450
+    },
+    "ros2/rosidl_dynamic_typesupport_fastrtps": {
+      "closedPrCount": 13,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 0,
+      "botPrCount": 1,
+      "medianSeconds": 25117,
+      "averageSeconds": 403900
+    },
+    "ros2/rosidl_python": {
+      "closedPrCount": 181,
+      "respondedPrCount": 171,
+      "noResponsePrCount": 10,
+      "botPrCount": 18,
+      "medianSeconds": 45070,
+      "averageSeconds": 764642
+    },
+    "ros2/rosidl_runtime_py": {
+      "closedPrCount": 31,
+      "respondedPrCount": 30,
+      "noResponsePrCount": 1,
+      "botPrCount": 6,
+      "medianSeconds": 12982,
+      "averageSeconds": 150215
+    },
+    "ros2/rosidl_typesupport": {
+      "closedPrCount": 148,
+      "respondedPrCount": 138,
+      "noResponsePrCount": 10,
+      "botPrCount": 4,
+      "medianSeconds": 32190,
+      "averageSeconds": 663077
+    },
+    "ros2/rosidl_typesupport_fastrtps": {
+      "closedPrCount": 129,
+      "respondedPrCount": 126,
+      "noResponsePrCount": 3,
+      "botPrCount": 16,
+      "medianSeconds": 31257,
+      "averageSeconds": 482574
+    },
+    "ros2/rosidl_typesupport_gurumdds": {
+      "closedPrCount": 4,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/ros_astra_camera": {
+      "closedPrCount": 25,
+      "respondedPrCount": 25,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 2699,
+      "averageSeconds": 93163
+    },
+    "ros2/ros_buildfarm_config": {
+      "closedPrCount": 387,
+      "respondedPrCount": 363,
+      "noResponsePrCount": 24,
+      "botPrCount": 0,
+      "medianSeconds": 7809,
+      "averageSeconds": 545556
+    },
+    "ros2/ros_network_viz": {
+      "closedPrCount": 5,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 1984,
+      "averageSeconds": 15358
+    },
+    "ros2/ros_testing": {
+      "closedPrCount": 16,
+      "respondedPrCount": 14,
+      "noResponsePrCount": 2,
+      "botPrCount": 2,
+      "medianSeconds": 13866,
+      "averageSeconds": 41040
+    },
+    "ros2/ros_workspace": {
+      "closedPrCount": 19,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 38125,
+      "averageSeconds": 203995
+    },
+    "ros2/rpyutils": {
+      "closedPrCount": 17,
+      "respondedPrCount": 17,
+      "noResponsePrCount": 0,
+      "botPrCount": 4,
+      "medianSeconds": 37765,
+      "averageSeconds": 64454
+    },
+    "ros2/rviz": {
+      "closedPrCount": 915,
+      "respondedPrCount": 867,
+      "noResponsePrCount": 48,
+      "botPrCount": 318,
+      "medianSeconds": 51263,
+      "averageSeconds": 1145419
+    },
+    "ros2/slide_show": {
+      "closedPrCount": 5,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/spdlog_vendor": {
+      "closedPrCount": 36,
+      "respondedPrCount": 35,
+      "noResponsePrCount": 1,
+      "botPrCount": 3,
+      "medianSeconds": 15179,
+      "averageSeconds": 506802
+    },
+    "ros2/sros2": {
+      "closedPrCount": 238,
+      "respondedPrCount": 228,
+      "noResponsePrCount": 10,
+      "botPrCount": 41,
+      "medianSeconds": 9264,
+      "averageSeconds": 723601
+    },
+    "ros2/system_tests": {
+      "closedPrCount": 506,
+      "respondedPrCount": 455,
+      "noResponsePrCount": 51,
+      "botPrCount": 21,
+      "medianSeconds": 17947,
+      "averageSeconds": 722559
+    },
+    "ros2/teleop_twist_joy": {
+      "closedPrCount": 43,
+      "respondedPrCount": 37,
+      "noResponsePrCount": 6,
+      "botPrCount": 9,
+      "medianSeconds": 11769,
+      "averageSeconds": 343501
+    },
+    "ros2/teleop_twist_keyboard": {
+      "closedPrCount": 33,
+      "respondedPrCount": 29,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 9093,
+      "averageSeconds": 1542481
+    },
+    "ros2/test_interface_files": {
+      "closedPrCount": 25,
+      "respondedPrCount": 23,
+      "noResponsePrCount": 2,
+      "botPrCount": 2,
+      "medianSeconds": 45693,
+      "averageSeconds": 151716
+    },
+    "ros2/tinyxml2_vendor": {
+      "closedPrCount": 22,
+      "respondedPrCount": 22,
+      "noResponsePrCount": 0,
+      "botPrCount": 4,
+      "medianSeconds": 3211,
+      "averageSeconds": 760597
+    },
+    "ros2/tinyxml_vendor": {
+      "closedPrCount": 21,
+      "respondedPrCount": 19,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 14250,
+      "averageSeconds": 81206
+    },
+    "ros2/tlsf": {
+      "closedPrCount": 16,
+      "respondedPrCount": 12,
+      "noResponsePrCount": 4,
+      "botPrCount": 2,
+      "medianSeconds": 30850,
+      "averageSeconds": 44682
+    },
+    "ros2/tsc_working_group_governance_template": {
+      "closedPrCount": 3,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 2638,
+      "averageSeconds": 65131
+    },
+    "ros2/tutorials": {
+      "closedPrCount": 13,
+      "respondedPrCount": 12,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 941,
+      "averageSeconds": 414967
+    },
+    "ros2/unique_identifier": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros2/unique_identifier_msgs": {
+      "closedPrCount": 30,
+      "respondedPrCount": 28,
+      "noResponsePrCount": 2,
+      "botPrCount": 2,
+      "medianSeconds": 7152,
+      "averageSeconds": 101438
+    },
+    "ros2/urdf": {
+      "closedPrCount": 47,
+      "respondedPrCount": 42,
+      "noResponsePrCount": 5,
+      "botPrCount": 3,
+      "medianSeconds": 19538,
+      "averageSeconds": 709036
+    },
+    "ros2/variants": {
+      "closedPrCount": 40,
+      "respondedPrCount": 36,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 11001,
+      "averageSeconds": 580155
+    },
+    "ros2/yaml_cpp_vendor": {
+      "closedPrCount": 41,
+      "respondedPrCount": 38,
+      "noResponsePrCount": 3,
+      "botPrCount": 2,
+      "medianSeconds": 52094,
+      "averageSeconds": 386753
+    },
+    "ament/ament_cmake": {
+      "closedPrCount": 385,
+      "respondedPrCount": 370,
+      "noResponsePrCount": 15,
+      "botPrCount": 42,
+      "medianSeconds": 16396,
+      "averageSeconds": 785107
+    },
+    "ament/ament_cobra": {
+      "closedPrCount": 20,
+      "respondedPrCount": 15,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 6958,
+      "averageSeconds": 1311333
+    },
+    "ament/ament_ikos": {
+      "closedPrCount": 4,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 4113,
+      "averageSeconds": 206312
+    },
+    "ament/ament_index": {
+      "closedPrCount": 98,
+      "respondedPrCount": 92,
+      "noResponsePrCount": 6,
+      "botPrCount": 10,
+      "medianSeconds": 17434,
+      "averageSeconds": 306535
+    },
+    "ament/ament_lint": {
+      "closedPrCount": 382,
+      "respondedPrCount": 359,
+      "noResponsePrCount": 23,
+      "botPrCount": 31,
+      "medianSeconds": 13151,
+      "averageSeconds": 1264958
+    },
+    "ament/ament_package": {
+      "closedPrCount": 130,
+      "respondedPrCount": 118,
+      "noResponsePrCount": 12,
+      "botPrCount": 10,
+      "medianSeconds": 3914,
+      "averageSeconds": 122937
+    },
+    "ament/googletest": {
+      "closedPrCount": 33,
+      "respondedPrCount": 30,
+      "noResponsePrCount": 3,
+      "botPrCount": 3,
+      "medianSeconds": 342273,
+      "averageSeconds": 2763094
+    },
+    "ament/google_benchmark_vendor": {
+      "closedPrCount": 30,
+      "respondedPrCount": 29,
+      "noResponsePrCount": 1,
+      "botPrCount": 1,
+      "medianSeconds": 6679,
+      "averageSeconds": 130909
+    },
+    "ament/sublime-ament": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ament/test_jenkins_test_results": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ament/uncrustify_vendor": {
+      "closedPrCount": 30,
+      "respondedPrCount": 28,
+      "noResponsePrCount": 2,
+      "botPrCount": 1,
+      "medianSeconds": 17364,
+      "averageSeconds": 162238
+    },
+    "ros-infrastructure/answers-archive": {
+      "closedPrCount": 18,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 116762,
+      "averageSeconds": 212425
+    },
+    "ros-infrastructure/apparmor_profiles": {
+      "closedPrCount": 3,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-infrastructure/bloom": {
+      "closedPrCount": 401,
+      "respondedPrCount": 303,
+      "noResponsePrCount": 98,
+      "botPrCount": 0,
+      "medianSeconds": 10549,
+      "averageSeconds": 1317787
+    },
+    "ros-infrastructure/buildfarm_deployment": {
+      "closedPrCount": 115,
+      "respondedPrCount": 76,
+      "noResponsePrCount": 39,
+      "botPrCount": 0,
+      "medianSeconds": 12347,
+      "averageSeconds": 522837
+    },
+    "ros-infrastructure/buildfarm_deployment_config": {
+      "closedPrCount": 45,
+      "respondedPrCount": 35,
+      "noResponsePrCount": 10,
+      "botPrCount": 0,
+      "medianSeconds": 37835,
+      "averageSeconds": 2029307
+    },
+    "ros-infrastructure/catkin-sphinx": {
+      "closedPrCount": 12,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 10572,
+      "averageSeconds": 22874665
+    },
+    "ros-infrastructure/catkinize": {
+      "closedPrCount": 18,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 10,
+      "botPrCount": 0,
+      "medianSeconds": 680049,
+      "averageSeconds": 1461895
+    },
+    "ros-infrastructure/catkin_basic": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-infrastructure/catkin_pkg": {
+      "closedPrCount": 270,
+      "respondedPrCount": 230,
+      "noResponsePrCount": 40,
+      "botPrCount": 0,
+      "medianSeconds": 28388,
+      "averageSeconds": 1117333
+    },
+    "ros-infrastructure/chef-ros-buildfarm": {
+      "closedPrCount": 2,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 613,
+      "averageSeconds": 613
+    },
+    "ros-infrastructure/ci": {
+      "closedPrCount": 8,
+      "respondedPrCount": 7,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 95817,
+      "averageSeconds": 806154
+    },
+    "ros-infrastructure/cookbook-jenkins": {
+      "closedPrCount": 18,
+      "respondedPrCount": 15,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 68861,
+      "averageSeconds": 2883548
+    },
+    "ros-infrastructure/cookbook-ros-buildfarm": {
+      "closedPrCount": 155,
+      "respondedPrCount": 141,
+      "noResponsePrCount": 14,
+      "botPrCount": 21,
+      "medianSeconds": 75574,
+      "averageSeconds": 1462652
+    },
+    "ros-infrastructure/docs-landing-page": {
+      "closedPrCount": 11,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 42252,
+      "averageSeconds": 162496
+    },
+    "ros-infrastructure/doc_rocker": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-infrastructure/index.ros.org": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 2156,
+      "averageSeconds": 2156
+    },
+    "ros-infrastructure/infra-variants": {
+      "closedPrCount": 8,
+      "respondedPrCount": 7,
+      "noResponsePrCount": 1,
+      "botPrCount": 3,
+      "medianSeconds": 94316,
+      "averageSeconds": 110691
+    },
+    "ros-infrastructure/infrastructure-website": {
+      "closedPrCount": 30,
+      "respondedPrCount": 24,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 57469,
+      "averageSeconds": 661383
+    },
+    "ros-infrastructure/mirror": {
+      "closedPrCount": 12,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 3603,
+      "averageSeconds": 20537
+    },
+    "ros-infrastructure/official-images": {
+      "closedPrCount": 8,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 7,
+      "botPrCount": 0,
+      "medianSeconds": 157539,
+      "averageSeconds": 157539
+    },
+    "ros-infrastructure/pallet-patcher": {
+      "closedPrCount": 15,
+      "respondedPrCount": 14,
+      "noResponsePrCount": 1,
+      "botPrCount": 3,
+      "medianSeconds": 17326,
+      "averageSeconds": 133509
+    },
+    "ros-infrastructure/planet.ros.org": {
+      "closedPrCount": 28,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 22,
+      "botPrCount": 0,
+      "medianSeconds": 32005,
+      "averageSeconds": 4152073
+    },
+    "ros-infrastructure/pyside_abi_checking": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-infrastructure/reprepro-updater": {
+      "closedPrCount": 236,
+      "respondedPrCount": 187,
+      "noResponsePrCount": 49,
+      "botPrCount": 0,
+      "medianSeconds": 35891,
+      "averageSeconds": 389530
+    },
+    "ros-infrastructure/robots.ros.org": {
+      "closedPrCount": 258,
+      "respondedPrCount": 152,
+      "noResponsePrCount": 106,
+      "botPrCount": 0,
+      "medianSeconds": 109978,
+      "averageSeconds": 580225
+    },
+    "ros-infrastructure/ros-apt-source": {
+      "closedPrCount": 29,
+      "respondedPrCount": 22,
+      "noResponsePrCount": 7,
+      "botPrCount": 0,
+      "medianSeconds": 7183,
+      "averageSeconds": 1392381
+    },
+    "ros-infrastructure/ros-buildfarm-deployment": {
+      "closedPrCount": 10,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 67215,
+      "averageSeconds": 4171719
+    },
+    "ros-infrastructure/ros.org_scripts": {
+      "closedPrCount": 4,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 15771,
+      "averageSeconds": 29868
+    },
+    "ros-infrastructure/ros2-cookbooks": {
+      "closedPrCount": 61,
+      "respondedPrCount": 59,
+      "noResponsePrCount": 2,
+      "botPrCount": 2,
+      "medianSeconds": 6171,
+      "averageSeconds": 177372
+    },
+    "ros-infrastructure/rosbrowse": {
+      "closedPrCount": 6,
+      "respondedPrCount": 5,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 1060321,
+      "averageSeconds": 1679710
+    },
+    "ros-infrastructure/rosdep": {
+      "closedPrCount": 355,
+      "respondedPrCount": 310,
+      "noResponsePrCount": 45,
+      "botPrCount": 0,
+      "medianSeconds": 9298,
+      "averageSeconds": 1584299
+    },
+    "ros-infrastructure/rosdistro": {
+      "closedPrCount": 155,
+      "respondedPrCount": 131,
+      "noResponsePrCount": 24,
+      "botPrCount": 0,
+      "medianSeconds": 8349,
+      "averageSeconds": 1913042
+    },
+    "ros-infrastructure/rosdistro-reviewer": {
+      "closedPrCount": 81,
+      "respondedPrCount": 79,
+      "noResponsePrCount": 2,
+      "botPrCount": 5,
+      "medianSeconds": 104,
+      "averageSeconds": 3611
+    },
+    "ros-infrastructure/rosdoc2": {
+      "closedPrCount": 143,
+      "respondedPrCount": 132,
+      "noResponsePrCount": 11,
+      "botPrCount": 0,
+      "medianSeconds": 23494,
+      "averageSeconds": 602155
+    },
+    "ros-infrastructure/rosdoc_lite": {
+      "closedPrCount": 39,
+      "respondedPrCount": 33,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 137747,
+      "averageSeconds": 3686089
+    },
+    "ros-infrastructure/rosindex": {
+      "closedPrCount": 268,
+      "respondedPrCount": 234,
+      "noResponsePrCount": 34,
+      "botPrCount": 0,
+      "medianSeconds": 55688,
+      "averageSeconds": 307615
+    },
+    "ros-infrastructure/rosinstall_generator": {
+      "closedPrCount": 62,
+      "respondedPrCount": 54,
+      "noResponsePrCount": 8,
+      "botPrCount": 0,
+      "medianSeconds": 23710,
+      "averageSeconds": 3035558
+    },
+    "ros-infrastructure/rospkg": {
+      "closedPrCount": 205,
+      "respondedPrCount": 175,
+      "noResponsePrCount": 30,
+      "botPrCount": 0,
+      "medianSeconds": 49941,
+      "averageSeconds": 1893278
+    },
+    "ros-infrastructure/roswiki": {
+      "closedPrCount": 94,
+      "respondedPrCount": 73,
+      "noResponsePrCount": 21,
+      "botPrCount": 0,
+      "medianSeconds": 4877,
+      "averageSeconds": 1621382
+    },
+    "ros-infrastructure/roswiki_vagrant": {
+      "closedPrCount": 4,
+      "respondedPrCount": 4,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 1395,
+      "averageSeconds": 3996
+    },
+    "ros-infrastructure/ros_bootstrap_dependencies": {
+      "closedPrCount": 1,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-infrastructure/ros_buildfarm": {
+      "closedPrCount": 835,
+      "respondedPrCount": 747,
+      "noResponsePrCount": 88,
+      "botPrCount": 0,
+      "medianSeconds": 7199,
+      "averageSeconds": 579306
+    },
+    "ros-infrastructure/ros_buildfarm_config": {
+      "closedPrCount": 228,
+      "respondedPrCount": 178,
+      "noResponsePrCount": 50,
+      "botPrCount": 0,
+      "medianSeconds": 3219,
+      "averageSeconds": 367093
+    },
+    "ros-infrastructure/ros_release_python": {
+      "closedPrCount": 32,
+      "respondedPrCount": 29,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 1924,
+      "averageSeconds": 88857
+    },
+    "ros-infrastructure/superflore": {
+      "closedPrCount": 217,
+      "respondedPrCount": 210,
+      "noResponsePrCount": 7,
+      "botPrCount": 0,
+      "medianSeconds": 47634,
+      "averageSeconds": 1016066
+    },
+    "ros-infrastructure/vcs2l": {
+      "closedPrCount": 78,
+      "respondedPrCount": 69,
+      "noResponsePrCount": 9,
+      "botPrCount": 24,
+      "medianSeconds": 62418,
+      "averageSeconds": 486089
+    },
+    "ros-infrastructure/www.ros.org": {
+      "closedPrCount": 34,
+      "respondedPrCount": 28,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 23080,
+      "averageSeconds": 546631
+    },
+    "ros-perception/ar_track_alvar": {
+      "closedPrCount": 16,
+      "respondedPrCount": 5,
+      "noResponsePrCount": 11,
+      "botPrCount": 0,
+      "medianSeconds": 9164807,
+      "averageSeconds": 8908580
+    },
+    "ros-perception/calibration": {
+      "closedPrCount": 32,
+      "respondedPrCount": 21,
+      "noResponsePrCount": 11,
+      "botPrCount": 0,
+      "medianSeconds": 71726,
+      "averageSeconds": 448744
+    },
+    "ros-perception/camera_info_manager_py": {
+      "closedPrCount": 4,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 1755135,
+      "averageSeconds": 1778983
+    },
+    "ros-perception/camera_pose": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-perception/depthimage_to_laserscan": {
+      "closedPrCount": 37,
+      "respondedPrCount": 20,
+      "noResponsePrCount": 17,
+      "botPrCount": 0,
+      "medianSeconds": 70739,
+      "averageSeconds": 14252928
+    },
+    "ros-perception/image_common": {
+      "closedPrCount": 247,
+      "respondedPrCount": 223,
+      "noResponsePrCount": 24,
+      "botPrCount": 29,
+      "medianSeconds": 121408,
+      "averageSeconds": 6086346
+    },
+    "ros-perception/image_pipeline": {
+      "closedPrCount": 622,
+      "respondedPrCount": 550,
+      "noResponsePrCount": 72,
+      "botPrCount": 67,
+      "medianSeconds": 41867,
+      "averageSeconds": 2698434
+    },
+    "ros-perception/image_transport_plugins": {
+      "closedPrCount": 127,
+      "respondedPrCount": 103,
+      "noResponsePrCount": 24,
+      "botPrCount": 38,
+      "medianSeconds": 182915,
+      "averageSeconds": 6565666
+    },
+    "ros-perception/image_transport_tutorials": {
+      "closedPrCount": 11,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 54290,
+      "averageSeconds": 3876831
+    },
+    "ros-perception/imu_pipeline": {
+      "closedPrCount": 26,
+      "respondedPrCount": 11,
+      "noResponsePrCount": 15,
+      "botPrCount": 0,
+      "medianSeconds": 453869,
+      "averageSeconds": 1113395
+    },
+    "ros-perception/laser_assembler": {
+      "closedPrCount": 17,
+      "respondedPrCount": 11,
+      "noResponsePrCount": 6,
+      "botPrCount": 0,
+      "medianSeconds": 385285,
+      "averageSeconds": 6636969
+    },
+    "ros-perception/laser_filters": {
+      "closedPrCount": 172,
+      "respondedPrCount": 130,
+      "noResponsePrCount": 42,
+      "botPrCount": 9,
+      "medianSeconds": 98486,
+      "averageSeconds": 3125712
+    },
+    "ros-perception/laser_geometry": {
+      "closedPrCount": 81,
+      "respondedPrCount": 64,
+      "noResponsePrCount": 17,
+      "botPrCount": 11,
+      "medianSeconds": 130061,
+      "averageSeconds": 8423917
+    },
+    "ros-perception/laser_pipeline": {
+      "closedPrCount": 2,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 2426448,
+      "averageSeconds": 2426448
+    },
+    "ros-perception/laser_proc": {
+      "closedPrCount": 9,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 13829,
+      "averageSeconds": 3888700
+    },
+    "ros-perception/megatree": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-perception/opencv_apps": {
+      "closedPrCount": 95,
+      "respondedPrCount": 54,
+      "noResponsePrCount": 41,
+      "botPrCount": 0,
+      "medianSeconds": 139930,
+      "averageSeconds": 15037229
+    },
+    "ros-perception/opencv_apps-release": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-perception/openslam_gmapping": {
+      "closedPrCount": 21,
+      "respondedPrCount": 12,
+      "noResponsePrCount": 9,
+      "botPrCount": 0,
+      "medianSeconds": 78904,
+      "averageSeconds": 12500813
+    },
+    "ros-perception/open_karto": {
+      "closedPrCount": 27,
+      "respondedPrCount": 14,
+      "noResponsePrCount": 13,
+      "botPrCount": 0,
+      "medianSeconds": 25748,
+      "averageSeconds": 3107508
+    },
+    "ros-perception/pcl-fuerte": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-perception/pcl_conversions": {
+      "closedPrCount": 10,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 28529,
+      "averageSeconds": 4876627
+    },
+    "ros-perception/pcl_msgs": {
+      "closedPrCount": 10,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 54052,
+      "averageSeconds": 127571
+    },
+    "ros-perception/perception_open3d": {
+      "closedPrCount": 18,
+      "respondedPrCount": 15,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 8693,
+      "averageSeconds": 59408
+    },
+    "ros-perception/perception_pcl": {
+      "closedPrCount": 298,
+      "respondedPrCount": 232,
+      "noResponsePrCount": 66,
+      "botPrCount": 1,
+      "medianSeconds": 26922,
+      "averageSeconds": 3913220
+    },
+    "ros-perception/pointcloud_to_laserscan": {
+      "closedPrCount": 34,
+      "respondedPrCount": 24,
+      "noResponsePrCount": 10,
+      "botPrCount": 2,
+      "medianSeconds": 97149,
+      "averageSeconds": 5265031
+    },
+    "ros-perception/point_cloud_transport": {
+      "closedPrCount": 109,
+      "respondedPrCount": 103,
+      "noResponsePrCount": 6,
+      "botPrCount": 62,
+      "medianSeconds": 51402,
+      "averageSeconds": 354002
+    },
+    "ros-perception/point_cloud_transport_plugins": {
+      "closedPrCount": 54,
+      "respondedPrCount": 49,
+      "noResponsePrCount": 5,
+      "botPrCount": 31,
+      "medianSeconds": 98479,
+      "averageSeconds": 199702
+    },
+    "ros-perception/point_cloud_transport_tutorial": {
+      "closedPrCount": 25,
+      "respondedPrCount": 21,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 49838,
+      "averageSeconds": 308831
+    },
+    "ros-perception/radar_msgs": {
+      "closedPrCount": 10,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 55227,
+      "averageSeconds": 226976
+    },
+    "ros-perception/slam_gmapping": {
+      "closedPrCount": 34,
+      "respondedPrCount": 26,
+      "noResponsePrCount": 8,
+      "botPrCount": 0,
+      "medianSeconds": 37084,
+      "averageSeconds": 1439186
+    },
+    "ros-perception/slam_gmapping_test_data": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 575895,
+      "averageSeconds": 575895
+    },
+    "ros-perception/slam_karto": {
+      "closedPrCount": 19,
+      "respondedPrCount": 10,
+      "noResponsePrCount": 9,
+      "botPrCount": 0,
+      "medianSeconds": 55251,
+      "averageSeconds": 7420371
+    },
+    "ros-perception/sparse_bundle_adjustment": {
+      "closedPrCount": 8,
+      "respondedPrCount": 5,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 2396,
+      "averageSeconds": 21162
+    },
+    "ros-perception/vision_msgs": {
+      "closedPrCount": 56,
+      "respondedPrCount": 46,
+      "noResponsePrCount": 10,
+      "botPrCount": 3,
+      "medianSeconds": 24526,
+      "averageSeconds": 1041444
+    },
+    "ros-perception/vision_opencv": {
+      "closedPrCount": 270,
+      "respondedPrCount": 209,
+      "noResponsePrCount": 61,
+      "botPrCount": 20,
+      "medianSeconds": 282534,
+      "averageSeconds": 6745932
+    },
+    "ros-visualization/executive_smach_visualization": {
+      "closedPrCount": 42,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 24,
+      "botPrCount": 0,
+      "medianSeconds": 1157302,
+      "averageSeconds": 5297169
+    },
+    "ros-visualization/interactive_markers": {
+      "closedPrCount": 92,
+      "respondedPrCount": 83,
+      "noResponsePrCount": 9,
+      "botPrCount": 5,
+      "medianSeconds": 155967,
+      "averageSeconds": 1973011
+    },
+    "ros-visualization/interactive_marker_twist_server": {
+      "closedPrCount": 17,
+      "respondedPrCount": 12,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 3990,
+      "averageSeconds": 437446
+    },
+    "ros-visualization/python_qt_binding": {
+      "closedPrCount": 103,
+      "respondedPrCount": 87,
+      "noResponsePrCount": 16,
+      "botPrCount": 9,
+      "medianSeconds": 70195,
+      "averageSeconds": 5287638
+    },
+    "ros-visualization/qt_gui_core": {
+      "closedPrCount": 233,
+      "respondedPrCount": 184,
+      "noResponsePrCount": 49,
+      "botPrCount": 17,
+      "medianSeconds": 63975,
+      "averageSeconds": 2510708
+    },
+    "ros-visualization/rqt": {
+      "closedPrCount": 146,
+      "respondedPrCount": 127,
+      "noResponsePrCount": 19,
+      "botPrCount": 22,
+      "medianSeconds": 63289,
+      "averageSeconds": 1644894
+    },
+    "ros-visualization/rqt_action": {
+      "closedPrCount": 18,
+      "respondedPrCount": 17,
+      "noResponsePrCount": 1,
+      "botPrCount": 4,
+      "medianSeconds": 64932,
+      "averageSeconds": 295788
+    },
+    "ros-visualization/rqt_bag": {
+      "closedPrCount": 118,
+      "respondedPrCount": 112,
+      "noResponsePrCount": 6,
+      "botPrCount": 31,
+      "medianSeconds": 96071,
+      "averageSeconds": 6344916
+    },
+    "ros-visualization/rqt_common_plugins": {
+      "closedPrCount": 198,
+      "respondedPrCount": 155,
+      "noResponsePrCount": 43,
+      "botPrCount": 0,
+      "medianSeconds": 44964,
+      "averageSeconds": 755179
+    },
+    "ros-visualization/rqt_console": {
+      "closedPrCount": 43,
+      "respondedPrCount": 31,
+      "noResponsePrCount": 12,
+      "botPrCount": 5,
+      "medianSeconds": 136307,
+      "averageSeconds": 10159278
+    },
+    "ros-visualization/rqt_dep": {
+      "closedPrCount": 11,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 235311,
+      "averageSeconds": 8087572
+    },
+    "ros-visualization/rqt_graph": {
+      "closedPrCount": 59,
+      "respondedPrCount": 56,
+      "noResponsePrCount": 3,
+      "botPrCount": 14,
+      "medianSeconds": 81168,
+      "averageSeconds": 12922984
+    },
+    "ros-visualization/rqt_image_view": {
+      "closedPrCount": 64,
+      "respondedPrCount": 54,
+      "noResponsePrCount": 10,
+      "botPrCount": 4,
+      "medianSeconds": 573543,
+      "averageSeconds": 6228764
+    },
+    "ros-visualization/rqt_launch": {
+      "closedPrCount": 8,
+      "respondedPrCount": 7,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 8595,
+      "averageSeconds": 9767
+    },
+    "ros-visualization/rqt_logger_level": {
+      "closedPrCount": 9,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 95628,
+      "averageSeconds": 27428431
+    },
+    "ros-visualization/rqt_moveit": {
+      "closedPrCount": 9,
+      "respondedPrCount": 4,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 912,
+      "averageSeconds": 64797
+    },
+    "ros-visualization/rqt_msg": {
+      "closedPrCount": 26,
+      "respondedPrCount": 23,
+      "noResponsePrCount": 3,
+      "botPrCount": 9,
+      "medianSeconds": 79280,
+      "averageSeconds": 1385768
+    },
+    "ros-visualization/rqt_nav_view": {
+      "closedPrCount": 9,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 224968,
+      "averageSeconds": 4328701
+    },
+    "ros-visualization/rqt_plot": {
+      "closedPrCount": 68,
+      "respondedPrCount": 62,
+      "noResponsePrCount": 6,
+      "botPrCount": 19,
+      "medianSeconds": 57665,
+      "averageSeconds": 10682162
+    },
+    "ros-visualization/rqt_pose_view": {
+      "closedPrCount": 7,
+      "respondedPrCount": 5,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 25397,
+      "averageSeconds": 326541
+    },
+    "ros-visualization/rqt_publisher": {
+      "closedPrCount": 40,
+      "respondedPrCount": 34,
+      "noResponsePrCount": 6,
+      "botPrCount": 6,
+      "medianSeconds": 101166,
+      "averageSeconds": 1161760
+    },
+    "ros-visualization/rqt_py_console": {
+      "closedPrCount": 20,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 2,
+      "botPrCount": 5,
+      "medianSeconds": 291977,
+      "averageSeconds": 756481
+    },
+    "ros-visualization/rqt_reconfigure": {
+      "closedPrCount": 106,
+      "respondedPrCount": 97,
+      "noResponsePrCount": 9,
+      "botPrCount": 17,
+      "medianSeconds": 50941,
+      "averageSeconds": 1916065
+    },
+    "ros-visualization/rqt_robot_dashboard": {
+      "closedPrCount": 9,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": 210100,
+      "averageSeconds": 458056
+    },
+    "ros-visualization/rqt_robot_monitor": {
+      "closedPrCount": 32,
+      "respondedPrCount": 21,
+      "noResponsePrCount": 11,
+      "botPrCount": 0,
+      "medianSeconds": 189417,
+      "averageSeconds": 370323
+    },
+    "ros-visualization/rqt_robot_plugins": {
+      "closedPrCount": 66,
+      "respondedPrCount": 43,
+      "noResponsePrCount": 23,
+      "botPrCount": 0,
+      "medianSeconds": 26868,
+      "averageSeconds": 370145
+    },
+    "ros-visualization/rqt_robot_steering": {
+      "closedPrCount": 23,
+      "respondedPrCount": 18,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 48776,
+      "averageSeconds": 14650398
+    },
+    "ros-visualization/rqt_runtime_monitor": {
+      "closedPrCount": 8,
+      "respondedPrCount": 6,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 83343,
+      "averageSeconds": 549253
+    },
+    "ros-visualization/rqt_rviz": {
+      "closedPrCount": 11,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": 23403,
+      "averageSeconds": 147800
+    },
+    "ros-visualization/rqt_service_caller": {
+      "closedPrCount": 28,
+      "respondedPrCount": 23,
+      "noResponsePrCount": 5,
+      "botPrCount": 7,
+      "medianSeconds": 254058,
+      "averageSeconds": 4508441
+    },
+    "ros-visualization/rqt_shell": {
+      "closedPrCount": 24,
+      "respondedPrCount": 21,
+      "noResponsePrCount": 3,
+      "botPrCount": 6,
+      "medianSeconds": 85686,
+      "averageSeconds": 3003110
+    },
+    "ros-visualization/rqt_srv": {
+      "closedPrCount": 16,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 3,
+      "botPrCount": 4,
+      "medianSeconds": 500555,
+      "averageSeconds": 2038746
+    },
+    "ros-visualization/rqt_tf_tree": {
+      "closedPrCount": 39,
+      "respondedPrCount": 22,
+      "noResponsePrCount": 17,
+      "botPrCount": 0,
+      "medianSeconds": 351924,
+      "averageSeconds": 3087337
+    },
+    "ros-visualization/rqt_top": {
+      "closedPrCount": 10,
+      "respondedPrCount": 9,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 77551,
+      "averageSeconds": 13663622
+    },
+    "ros-visualization/rqt_topic": {
+      "closedPrCount": 48,
+      "respondedPrCount": 42,
+      "noResponsePrCount": 6,
+      "botPrCount": 10,
+      "medianSeconds": 46073,
+      "averageSeconds": 2575626
+    },
+    "ros-visualization/rqt_web": {
+      "closedPrCount": 5,
+      "respondedPrCount": 4,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 14465,
+      "averageSeconds": 133262
+    },
+    "ros-visualization/rviz": {
+      "closedPrCount": 648,
+      "respondedPrCount": 457,
+      "noResponsePrCount": 191,
+      "botPrCount": 7,
+      "medianSeconds": 51698,
+      "averageSeconds": 1435975
+    },
+    "ros-visualization/rviz_animated_view_controller": {
+      "closedPrCount": 18,
+      "respondedPrCount": 8,
+      "noResponsePrCount": 10,
+      "botPrCount": 0,
+      "medianSeconds": 34839,
+      "averageSeconds": 29009983
+    },
+    "ros-visualization/tango_icons_vendor": {
+      "closedPrCount": 13,
+      "respondedPrCount": 13,
+      "noResponsePrCount": 0,
+      "botPrCount": 5,
+      "medianSeconds": 19064,
+      "averageSeconds": 21482
+    },
+    "ros-visualization/view_controller_msgs": {
+      "closedPrCount": 7,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 4,
+      "botPrCount": 0,
+      "medianSeconds": 5032,
+      "averageSeconds": 21506
+    },
+    "ros-visualization/visualization_tutorials": {
+      "closedPrCount": 56,
+      "respondedPrCount": 48,
+      "noResponsePrCount": 8,
+      "botPrCount": 0,
+      "medianSeconds": 430810,
+      "averageSeconds": 10727852
+    },
+    "ros-tooling/.github": {
+      "closedPrCount": 6,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 466,
+      "averageSeconds": 466
+    },
+    "ros-tooling/action-ros-buildfarm": {
+      "closedPrCount": 1,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/action-ros-ci": {
+      "closedPrCount": 279,
+      "respondedPrCount": 214,
+      "noResponsePrCount": 65,
+      "botPrCount": 585,
+      "medianSeconds": 19635,
+      "averageSeconds": 295567
+    },
+    "ros-tooling/action-ros-ci-template": {
+      "closedPrCount": 7,
+      "respondedPrCount": 3,
+      "noResponsePrCount": 4,
+      "botPrCount": 45,
+      "medianSeconds": 1186,
+      "averageSeconds": 1476
+    },
+    "ros-tooling/action-ros-lint": {
+      "closedPrCount": 59,
+      "respondedPrCount": 36,
+      "noResponsePrCount": 23,
+      "botPrCount": 321,
+      "medianSeconds": 1445,
+      "averageSeconds": 26549
+    },
+    "ros-tooling/community": {
+      "closedPrCount": 27,
+      "respondedPrCount": 19,
+      "noResponsePrCount": 8,
+      "botPrCount": 0,
+      "medianSeconds": 42442,
+      "averageSeconds": 177199
+    },
+    "ros-tooling/design": {
+      "closedPrCount": 2,
+      "respondedPrCount": 2,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 53800,
+      "averageSeconds": 53800
+    },
+    "ros-tooling/graph-monitor": {
+      "closedPrCount": 48,
+      "respondedPrCount": 14,
+      "noResponsePrCount": 34,
+      "botPrCount": 0,
+      "medianSeconds": 8174,
+      "averageSeconds": 324069
+    },
+    "ros-tooling/keyboard_handler": {
+      "closedPrCount": 29,
+      "respondedPrCount": 28,
+      "noResponsePrCount": 1,
+      "botPrCount": 29,
+      "medianSeconds": 5232,
+      "averageSeconds": 113522
+    },
+    "ros-tooling/launch_frontend_py": {
+      "closedPrCount": 12,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 12,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/libstatistics_collector": {
+      "closedPrCount": 76,
+      "respondedPrCount": 72,
+      "noResponsePrCount": 4,
+      "botPrCount": 128,
+      "medianSeconds": 7904,
+      "averageSeconds": 1214046
+    },
+    "ros-tooling/nodl": {
+      "closedPrCount": 159,
+      "respondedPrCount": 83,
+      "noResponsePrCount": 76,
+      "botPrCount": 0,
+      "medianSeconds": 44661,
+      "averageSeconds": 923597
+    },
+    "ros-tooling/repo-configs": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/rmw_implementation": {
+      "closedPrCount": 15,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 15,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/roadmap": {
+      "closedPrCount": 2,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 2,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/ros-github-scripts": {
+      "closedPrCount": 31,
+      "respondedPrCount": 26,
+      "noResponsePrCount": 5,
+      "botPrCount": 0,
+      "medianSeconds": 5660,
+      "averageSeconds": 491850
+    },
+    "ros-tooling/ros-tooling.github.io": {
+      "closedPrCount": 3,
+      "respondedPrCount": 2,
+      "noResponsePrCount": 1,
+      "botPrCount": 0,
+      "medianSeconds": 354,
+      "averageSeconds": 354
+    },
+    "ros-tooling/rosbag2_broll": {
+      "closedPrCount": 3,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 3,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/rosbag2_sample_plugins": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/rosgraph": {
+      "closedPrCount": 1,
+      "respondedPrCount": 1,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": 784088,
+      "averageSeconds": 784088
+    },
+    "ros-tooling/ros_code_standard": {
+      "closedPrCount": 0,
+      "respondedPrCount": 0,
+      "noResponsePrCount": 0,
+      "botPrCount": 0,
+      "medianSeconds": null,
+      "averageSeconds": null
+    },
+    "ros-tooling/setup-ros": {
+      "closedPrCount": 205,
+      "respondedPrCount": 151,
+      "noResponsePrCount": 54,
+      "botPrCount": 579,
+      "medianSeconds": 14617,
+      "averageSeconds": 241448
+    },
+    "ros-tooling/setup-ros-docker": {
+      "closedPrCount": 70,
+      "respondedPrCount": 50,
+      "noResponsePrCount": 20,
+      "botPrCount": 1,
+      "medianSeconds": 3757,
+      "averageSeconds": 69242
+    },
+    "ros-tooling/topic_tools": {
+      "closedPrCount": 64,
+      "respondedPrCount": 55,
+      "noResponsePrCount": 9,
+      "botPrCount": 59,
+      "medianSeconds": 52226,
+      "averageSeconds": 751435
+    }
+  },
+  "committers": {
+    "clalancette": 3479,
+    "ahcorde": 2938,
+    "dirk-thomas": 2820,
+    "wjwwood": 1434,
+    "cottsay": 1428,
+    "jacobperron": 1119,
+    "sloretz": 904,
+    "nuclearsandwich": 891,
+    "fujitatomoya": 846,
+    "tfoote": 806,
+    "ivanpauno": 748,
+    "hidmic": 704,
+    "mikaelarguedas": 618,
+    "mjcarroll": 607,
+    "christophebedard": 592,
+    "emersonknapp": 506,
+    "Karsten1987": 400,
+    "MichaelOrlov": 370,
+    "dhood": 279,
+    "audrow": 273,
+    "brawner": 224,
+    "Yadunund": 217,
+    "vrabaud": 204,
+    "jackieokay": 183,
+    "maryaB-osr": 178,
+    "SteveMacenski": 173,
+    "allenh1": 172,
+    "esteve": 159,
+    "JWhitleyWork": 151,
+    "mjeronimo": 132,
+    "JanStaschulat": 132,
+    "jonbinney": 128,
+    "mikeferguson": 122,
+    "rhaschke": 121,
+    "thomas-moulard": 119,
+    "Blast545": 106,
+    "gbiggs": 94,
+    "claraberendsen": 86,
+    "chapulina": 84,
+    "mlautman": 83,
+    "methylDragon": 80,
+    "Crola1702": 73,
+    "kscottz": 73,
+    "gerkey": 72,
+    "j-rivero": 70,
+    "ablasdel": 68,
+    "jmachowinski": 66,
+    "claireyywang": 58,
+    "leander-dsouza": 58,
+    "k-okada": 56,
+    "eboasson": 54,
+    "adityapande-1995": 52,
+    "piraka9011": 52,
+    "dgossow": 46,
+    "ijnek": 46,
+    "dabonnie": 45,
+    "mabelzhang": 40,
+    "quarkytale": 35,
+    "wkentaro": 35,
+    "marcoag": 33,
+    "kyrofa": 33,
+    "arne48": 33,
+    "Kukanani": 32,
+    "paulbovbel": 32,
+    "InvincibleRMC": 31,
+    "zmichaels11": 31,
+    "mossmaurice": 30,
+    "apojomovsky": 28,
+    "alsora": 28,
+    "skyegalaxy": 27,
+    "pablogs9": 27,
+    "JEnoch": 27,
+    "rotu": 26,
+    "prajakta-gokhale": 24,
+    "hershwg": 23,
+    "codebot": 22,
+    "aprotyas": 22,
+    "miguelgonrod": 21,
+    "Lobotuerk": 21,
+    "Arnatious": 21,
+    "rebecca-butler": 19,
+    "Rayman": 19,
+    "robwoolley": 17,
+    "james-rms": 16,
+    "malsbat": 15,
+    "MatthijsBurgh": 15,
+    "skucheria": 14,
+    "mm318": 14,
+    "jubeira": 13,
+    "sgayda2": 12,
+    "asorbini": 12,
+    "JShep1": 12,
+    "BMarchi": 11,
+    "jack-oquin": 11,
+    "130s": 11,
+    "gonzodepedro": 10,
+    "herb-kuta-lge": 10,
+    "gaoethan": 10,
+    "DLu": 10,
+    "ruffsl": 9,
+    "MiguelCompany": 9,
+    "LucidOne": 9,
+    "jkammerl": 9,
+    "knmcguire": 8,
+    "gbalke": 8,
+    "ihasdapie": 8,
+    "hersh": 8,
+    "alistair-english": 8,
+    "nvcyc": 7,
+    "jaisontj": 7,
+    "john-maidbot": 7,
+    "asymingt": 6,
+    "YuanYuYuan": 6,
+    "tonybaltovski": 6,
+    "mikepurvis": 6,
+    "yuanknv": 5,
+    "chadrockey": 5,
+    "nkhedekar": 5,
+    "luke-alloy": 5,
+    "iuhilnehc-ynos": 4,
+    "ernestmc": 4,
+    "sotte": 4,
+    "DorianScholz": 4,
+    "flynneva": 4,
+    "artivis": 4,
+    "lsy3": 4,
+    "Acuadros95": 3,
+    "richiprosima": 3,
+    "YoungJin-gurum": 3,
+    "lihui815": 3,
+    "ivanperez-keera": 3,
+    "troygibb": 3,
+    "rohbotics": 2,
+    "deepanshubansal01": 2,
+    "anup-pem": 2,
+    "norro": 2,
+    "4ntn": 2,
+    "azeey": 2,
+    "trubio-rti": 2,
+    "fgallegosalido": 2,
+    "JaimeMartin": 2,
+    "kurshakuz": 2,
+    "jikawa-az": 2,
+    "jhdcs": 2,
+    "Maanasa-Kotha": 2,
+    "KmoM88": 2,
+    "ahendrix": 2,
+    "aleeper": 2,
+    "rohitsalem": 1,
+    "kev-the-dev": 1,
+    "Timple": 1,
+    "arjo129": 1,
+    "AAlon": 1,
+    "francocipollone": 1,
+    "peterpena": 1,
+    "adamdbrw": 1,
+    "sservulo": 1,
+    "ijt": 1,
+    "eitanme": 1,
+    "Alessandro-Barbieri": 1,
+    "jbohren": 1,
+    "rsinnet": 1,
+    "giusebar": 1,
+    "lucashan": 1,
+    "wep21": 1
+  },
+  "committerComparison": [
+    {
+      "period": "2012",
+      "committer": {
+        "prs": 17,
+        "authors": 7,
+        "median": 41578,
+        "average": 1206082.9411764706
+      },
+      "nonCommitter": {
+        "prs": 20,
+        "authors": 10,
+        "median": 24621.0,
+        "average": 8911936.85
+      }
+    },
+    {
+      "period": "2013",
+      "committer": {
+        "prs": 188,
+        "authors": 22,
+        "median": 5311.0,
+        "average": 135097.32978723405
+      },
+      "nonCommitter": {
+        "prs": 116,
+        "authors": 62,
+        "median": 29487.0,
+        "average": 431555.474137931
+      }
+    },
+    {
+      "period": "2014",
+      "committer": {
+        "prs": 196,
+        "authors": 18,
+        "median": 7649.5,
+        "average": 713889.724489796
+      },
+      "nonCommitter": {
+        "prs": 187,
+        "authors": 87,
+        "median": 28856,
+        "average": 1391112.219251337
+      }
+    },
+    {
+      "period": "2015",
+      "committer": {
+        "prs": 856,
+        "authors": 30,
+        "median": 3105.5,
+        "average": 572900.4813084112
+      },
+      "nonCommitter": {
+        "prs": 173,
+        "authors": 103,
+        "median": 51214,
+        "average": 4773441.231213873
+      }
+    },
+    {
+      "period": "2016",
+      "committer": {
+        "prs": 995,
+        "authors": 30,
+        "median": 5717,
+        "average": 1033524.5547738693
+      },
+      "nonCommitter": {
+        "prs": 230,
+        "authors": 119,
+        "median": 58354.5,
+        "average": 3203364.652173913
+      }
+    },
+    {
+      "period": "2017",
+      "committer": {
+        "prs": 1438,
+        "authors": 32,
+        "median": 4847.0,
+        "average": 767151.2739916551
+      },
+      "nonCommitter": {
+        "prs": 330,
+        "authors": 165,
+        "median": 37624.5,
+        "average": 1787321.9515151514
+      }
+    },
+    {
+      "period": "2018",
+      "committer": {
+        "prs": 1629,
+        "authors": 52,
+        "median": 7849,
+        "average": 790657.707796194
+      },
+      "nonCommitter": {
+        "prs": 503,
+        "authors": 185,
+        "median": 116672,
+        "average": 3944135.477137177
+      }
+    },
+    {
+      "period": "2019",
+      "committer": {
+        "prs": 2733,
+        "authors": 71,
+        "median": 6805,
+        "average": 389721.2685693377
+      },
+      "nonCommitter": {
+        "prs": 727,
+        "authors": 279,
+        "median": 80419,
+        "average": 4116805.1334250346
+      }
+    },
+    {
+      "period": "2020",
+      "committer": {
+        "prs": 4269,
+        "authors": 74,
+        "median": 10580,
+        "average": 521407.82478332164
+      },
+      "nonCommitter": {
+        "prs": 721,
+        "authors": 341,
+        "median": 81964,
+        "average": 3205048.3162274617
+      }
+    },
+    {
+      "period": "2021",
+      "committer": {
+        "prs": 2460,
+        "authors": 74,
+        "median": 22529.5,
+        "average": 773448.7065040651
+      },
+      "nonCommitter": {
+        "prs": 732,
+        "authors": 337,
+        "median": 46536.0,
+        "average": 2492958.7172131147
+      }
+    },
+    {
+      "period": "2022",
+      "committer": {
+        "prs": 1675,
+        "authors": 64,
+        "median": 38719,
+        "average": 832445.4788059702
+      },
+      "nonCommitter": {
+        "prs": 646,
+        "authors": 337,
+        "median": 87816.0,
+        "average": 3723320.9055727553
+      }
+    },
+    {
+      "period": "2023",
+      "committer": {
+        "prs": 1280,
+        "authors": 56,
+        "median": 31993.0,
+        "average": 1015937.3953125
+      },
+      "nonCommitter": {
+        "prs": 653,
+        "authors": 320,
+        "median": 44827,
+        "average": 2479390.039816233
+      }
+    },
+    {
+      "period": "2024",
+      "committer": {
+        "prs": 1947,
+        "authors": 54,
+        "median": 17070,
+        "average": 557062.0380071906
+      },
+      "nonCommitter": {
+        "prs": 694,
+        "authors": 289,
+        "median": 44785.5,
+        "average": 1137426.1498559078
+      }
+    },
+    {
+      "period": "2025",
+      "committer": {
+        "prs": 1528,
+        "authors": 55,
+        "median": 18443.5,
+        "average": 364254.2598167539
+      },
+      "nonCommitter": {
+        "prs": 901,
+        "authors": 317,
+        "median": 32280,
+        "average": 832139.6348501665
+      }
+    },
+    {
+      "period": "2026",
+      "committer": {
+        "prs": 1493,
+        "authors": 50,
+        "median": 29043,
+        "average": 337619.8305425318
+      },
+      "nonCommitter": {
+        "prs": 778,
+        "authors": 330,
+        "median": 54122.5,
+        "average": 392157.08868894604
+      }
+    },
+    {
+      "period": "All",
+      "committer": {
+        "prs": 22704,
+        "authors": 163,
+        "median": 12853.0,
+        "average": 622331.024136716
+      },
+      "nonCommitter": {
+        "prs": 7411,
+        "authors": 2274,
+        "median": 52284,
+        "average": 2377799.5510727298
+      }
+    }
+  ],
+  "percentiles": {
+    "25": 1905,
+    "50": 20257,
+    "75": 168255,
+    "90": 941511,
+    "95": 2473266,
+    "99": 22077391
+  }
+}

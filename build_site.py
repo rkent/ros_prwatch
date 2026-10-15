@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build a static website of the results in _site/.
 
-Reads artifacts/first_response.json and artifacts/stale_prs.json and writes a
-single self-contained page, _site/index.html.
+Reads artifacts/repos.json, artifacts/first_response_summary.json and
+artifacts/stale_prs.json, and writes a single self-contained page,
+_site/index.html. It does not need the full first_response.json.
 """
 
 import json
@@ -11,12 +12,11 @@ from datetime import datetime
 from html import escape
 from pathlib import Path
 
-from committers import comparison_rows, load_prs, merge_counts
-from first_response import OUTPUT_FILE as FIRST_RESPONSE_FILE, ROOT, format_duration
+from first_response import REPOS_FILE, ROOT, format_duration
 from stale_prs import OUTPUT_FILE as STALE_FILE
+from summarize_first_response import load_summary
 
 SITE_DIR = ROOT / "_site"
-PERCENTILES = [25, 50, 75, 90, 95, 99]
 
 
 def fmt(seconds):
@@ -30,11 +30,6 @@ def fmt_date(iso):
 def gh_link(path, text=None):
     return (f'<a href="https://github.com/{escape(path)}">'
             f'{escape(text if text is not None else path)}</a>')
-
-
-def percentile(sorted_values, pct):
-    index = min(len(sorted_values) - 1, round(pct / 100 * (len(sorted_values) - 1)))
-    return sorted_values[index]
 
 
 def stat_card(value, label):
@@ -61,11 +56,15 @@ def stale_table(stale_prs):
     return "\n".join(rows)
 
 
-def repo_table(first_response, stale_prs):
+def repo_table(repo_names, repo_stats, stale_prs):
     stale = Counter(pr["repo"] for pr in stale_prs)
     neglected = Counter(pr["repo"] for pr in stale_prs if pr["committerComments"] == 0)
+    # Repos added since the summary was made have no closed-PR statistics yet.
+    no_stats = {"closedPrCount": 0, "respondedPrCount": 0,
+                "medianSeconds": None, "averageSeconds": None}
     rows = []
-    for repo, data in first_response["repos"].items():
+    for repo in repo_names:
+        data = repo_stats.get(repo, no_stats)
         if data["closedPrCount"] == 0 and not stale[repo]:
             continue
         rows.append(f"""<tr>
@@ -93,31 +92,31 @@ def comparison_table(rows):
     return "\n".join(out)
 
 
-def percentile_table(times):
-    if not times:
+def percentile_table(percentiles):
+    if not percentiles:
         return '<tr><td colspan="2" class="muted">No closed PRs with a response</td></tr>'
     return "\n".join(
-        f'<tr><td>{p}%</td><td class="num">{fmt(percentile(times, p))}</td></tr>'
-        for p in PERCENTILES
+        f'<tr><td>{p}%</td><td class="num">{fmt(seconds)}</td></tr>'
+        for p, seconds in percentiles.items()
     )
 
 
 def build():
-    first_response = json.loads(FIRST_RESPONSE_FILE.read_text())
+    summary = load_summary()
+    repo_list = json.loads(REPOS_FILE.read_text())
     stale = json.loads(STALE_FILE.read_text())
     stale_prs = stale["pullRequests"]
-    prs = load_prs(FIRST_RESPONSE_FILE)
-    committers = set(merge_counts(prs))
-    times = sorted(pr["timeToFirstResponseSeconds"] for pr in prs)
-    overall = first_response["overall"]
+    overall = summary["overall"]
+    repo_names = [r["nameWithOwner"] for org_repos in repo_list["orgs"].values()
+                  for r in org_repos]
     neglected_count = sum(pr["committerComments"] == 0 for pr in stale_prs)
-    orgs = sorted({repo.split("/")[0] for repo in first_response["repos"]})
+    orgs = sorted(repo_list["orgs"])
     repos_with_stale = sorted({pr["repo"] for pr in stale_prs})
     generated = datetime.fromisoformat(stale["generatedAt"]).strftime("%Y-%m-%d")
     days = stale["minDaysWaiting"]
 
     cards = "".join([
-        stat_card(len(first_response["repos"]), "repos tracked"),
+        stat_card(len(repo_names), "repos tracked"),
         stat_card(f"{overall['respondedPrCount']:,}", "closed PRs with a response"),
         stat_card(fmt(overall["medianSeconds"]), "median time to first response"),
         stat_card(len(stale_prs), f"open PRs waiting > {days} days"),
@@ -133,11 +132,11 @@ def build():
         days=days,
         repo_options=repo_options,
         stale_rows=stale_table(stale_prs),
-        repo_rows=repo_table(first_response, stale_prs),
-        comparison_rows=comparison_table(comparison_rows(prs, committers)),
-        committer_count=len(committers),
-        percentile_rows=percentile_table(times),
-        responded=f"{len(times):,}",
+        repo_rows=repo_table(repo_names, summary["repos"], stale_prs),
+        comparison_rows=comparison_table(summary["committerComparison"]),
+        committer_count=len(summary["committers"]),
+        percentile_rows=percentile_table(summary["percentiles"]),
+        responded=f"{overall['respondedPrCount']:,}",
     )
     SITE_DIR.mkdir(exist_ok=True)
     (SITE_DIR / "index.html").write_text(html)

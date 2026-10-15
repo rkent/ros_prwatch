@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-# Collect all data from GitHub and build the website in _site/.
+# Refresh the open-PR data from GitHub and rebuild the website in _site/.
 #
 # Usage: ./build.sh [--days N]
 #
 #   --days N   list open PRs whose author has waited more than N days for a
 #              response (default: see `stale_prs.py --help`)
 #
-# Requires a .env file containing GITHUB_TOKEN, and orgs.txt listing the
-# organizations to examine. Collecting closed-PR data takes about 20 minutes.
+# Requires a .env file containing GITHUB_TOKEN, orgs.txt listing the
+# organizations to examine, and artifacts/first_response_summary.json. The
+# summary comes from the slow closed-PR collection, which is run manually:
+#   .venv/bin/python first_response.py
 
 set -euo pipefail
 
@@ -51,6 +53,11 @@ if [[ ! -f .env ]]; then
   exit 1
 fi
 
+if [[ ! -f artifacts/first_response_summary.json ]]; then
+  echo "Missing artifacts/first_response_summary.json; run first_response.py first" >&2
+  exit 1
+fi
+
 if [[ ! -x .venv/bin/python ]]; then
   echo "Creating virtual environment"
   python3 -m venv .venv
@@ -61,9 +68,6 @@ PYTHON=.venv/bin/python
 
 echo "== Listing repos"
 $PYTHON list_repos.py
-
-echo "== Measuring time to first response for closed PRs"
-$PYTHON first_response.py
 
 echo "== Finding open PRs waiting on a response"
 $PYTHON stale_prs.py ${STALE_ARGS[@]+"${STALE_ARGS[@]}"}

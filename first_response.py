@@ -320,6 +320,11 @@ def main():
           f"average {output['overall']['average']}, median {output['overall']['median']}")
     print(f"Wrote {output_file.relative_to(ROOT)}")
 
+    if args.limit is None:
+        # Imported here because summarize_first_response imports this module.
+        from summarize_first_response import write_summary
+        write_summary(output)
+
 
 if __name__ == "__main__":
     main()
