@@ -141,12 +141,16 @@ def all_activity(gh, owner, name, pr):
 def pr_events(gh, owner, name, pr):
     """Return the PR's (time, login, kind) events in time order.
 
-    Kinds are "open", "comment", "merge" and "close". Bots are ignored.
+    Kinds are "open", "comment", "merge" and "close". Bots are ignored, as
+    are comments made after the PR was closed: the wait ended at the close.
     """
+    closed_at = pr.get("closedAt") and parse_time(pr["closedAt"])
     events = [(pr["createdAt"], login_of(pr["author"]), "open")]
     for item in all_activity(gh, owner, name, pr):
         ts = item.get("createdAt") or item.get("submittedAt")
         if ts is None or is_bot(item["author"]):  # pending review, or bot
+            continue
+        if closed_at and parse_time(ts) > closed_at:
             continue
         events.append((ts, login_of(item["author"]), "comment"))
     if pr["state"] == "MERGED":

@@ -121,7 +121,8 @@ results are not overwritten, and do not update the summary.
   in the last `--window` days. Here a merge or close by someone other than the
   author also counts as a response. Each PR records the latest such response
   from anyone, and from a committer. Comments from non-committers don't end
-  the wait for a committer response.
+  the wait for a committer response. Comments made after a PR was closed
+  are ignored.
 
 ## Caveats
 
