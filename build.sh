@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Refresh the open-PR data from GitHub and rebuild the website in docs/.
 #
-# Usage: ./build.sh [--days N]
+# Usage: ./build.sh [--days N] [--window N]
 #
-#   --days N   list open PRs whose author has waited more than N days for a
-#              response (default: see `stale_prs.py --help`)
+#   --days N     list open PRs whose author has waited more than N days for a
+#                response (default: see `stale_prs.py --help`)
+#   --window N   also list PRs whose wait of more than --days days ended with
+#                a response in the last N days (default: see `stale_prs.py --help`)
 #
 # Requires GITHUB_TOKEN (in .env or the environment), orgs.txt listing the
 # organizations to examine, and artifacts/first_response_summary.json. The
@@ -14,7 +16,7 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 [--days N]"
+  echo "Usage: $0 [--days N] [--window N]"
 }
 
 # Check arguments before the long data-collection steps run.
@@ -25,12 +27,14 @@ while [[ $# -gt 0 ]]; do
       usage
       exit 0
       ;;
-    --days=*)
-      days="${1#--days=}"
+    --days=*|--window=*)
+      option="${1%%=*}"
+      value="${1#*=}"
       shift
       ;;
-    --days)
-      days="${2-}"
+    --days|--window)
+      option="$1"
+      value="${2-}"
       shift $(( $# > 1 ? 2 : 1 ))
       ;;
     *)
@@ -38,12 +42,12 @@ while [[ $# -gt 0 ]]; do
       exit 1
       ;;
   esac
-  if [[ ! "$days" =~ ^[0-9]+$ ]]; then
-    echo "--days needs a whole number of days, got '$days'" >&2
+  if [[ ! "$value" =~ ^[0-9]+$ ]]; then
+    echo "$option needs a whole number of days, got '$value'" >&2
     usage >&2
     exit 1
   fi
-  STALE_ARGS+=(--days "$days")
+  STALE_ARGS+=("$option" "$value")
 done
 
 cd "$(dirname "$0")"
@@ -69,7 +73,7 @@ PYTHON=.venv/bin/python
 echo "== Listing repos"
 $PYTHON list_repos.py
 
-echo "== Finding open PRs waiting on a response"
+echo "== Finding waiting and recently answered PRs"
 $PYTHON stale_prs.py ${STALE_ARGS[@]+"${STALE_ARGS[@]}"}
 
 echo "== Building website"

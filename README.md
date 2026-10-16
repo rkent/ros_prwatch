@@ -51,6 +51,7 @@ The data comes in two parts that are refreshed on different schedules:
    ```bash
    ./build.sh            # default waiting-PR threshold (see stale_prs.py --help)
    ./build.sh --days 30  # or choose a different threshold
+   ./build.sh --window 60  # look back 60 days for answered PRs (default 30)
    ```
 
 ## Automatic daily rebuild
@@ -80,9 +81,9 @@ Each step reads the output of the earlier ones. All output is written to
 | `first_response.py` | `first_response.json`, `first_response_summary.json` | For every closed PR, finds the first response by someone other than the author, and computes median and average time to first response per repo and overall. A full run also writes the summary. |
 | `summarize_first_response.py` | `first_response_summary.json` | Regenerates the summary from an existing `first_response.json` without fetching anything. |
 | `committers.py` | (prints) | Reads `first_response.json`. Lists committers with merge counts, compares time to first response for committer and non-committer authors by year, and shows the distribution of response times in 100 equal-size buckets. |
-| `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than a threshold number of days (`--days N`; see `--help` for the default). |
+| `stale_prs.py` | `stale_prs.json` | Lists open PRs where the author made the last comment and has been waiting more than a threshold number of days (`--days N`; see `--help` for the default). Also lists recently answered PRs: open, merged or closed PRs whose author waited that long, where the wait ended with a response in the last `--window N` days (default 30). |
 | `neglected_repos.py` | (prints) | Lists repos whose stale PRs have no comments from committers. |
-| `build_site.py` | `docs/index.html` | Builds a static website from `repos.json`, the summary and `stale_prs.json`, with links to each waiting PR. |
+| `build_site.py` | `docs/index.html` | Builds a static website from `repos.json`, the summary and `stale_prs.json`, with links to each waiting and recently answered PR. |
 
 Example:
 
@@ -110,10 +111,17 @@ results are not overwritten, and do not update the summary.
   that never received a response are counted but excluded from response-time
   statistics.
 - **Committer**: anyone who merged at least one closed PR in the last
-  `first_response.py` run, across all examined repos.
+  `first_response.py` run, across all examined repos, plus anyone who merged
+  a PR within the `stale_prs.py` window (`--window`, default 30 days).
 - **Stale PR**: an open, non-draft PR where the author (including by opening
   the PR) made the last comment more than a threshold number of days ago
   (set with `--days`; `DEFAULT_DAYS` in `stale_prs.py`).
+- **Recently answered PR**: an open, merged or closed non-draft PR whose
+  author waited more than `--days` days, where the wait ended with a response
+  in the last `--window` days. Here a merge or close by someone other than the
+  author also counts as a response. Each PR records the latest such response
+  from anyone, and from a committer. Comments from non-committers don't end
+  the wait for a committer response.
 
 ## Caveats
 
@@ -122,7 +130,7 @@ results are not overwritten, and do not update the summary.
   any response are not included.
 - Committer status is the current status applied to all years, and is not
   limited to the repo where the person merged PRs.
-- Between `first_response.py` runs, the committer list and response-time
-  statistics stay fixed. Repos added since then appear on the site without
-  closed-PR statistics.
+- Between `first_response.py` runs, the response-time statistics stay fixed,
+  and the committer list grows only by recent mergers. Repos added since then
+  appear on the site without closed-PR statistics.
 - `committers.py` identifies bot mergers by login name only.

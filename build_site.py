@@ -2,7 +2,7 @@
 """Build a static website of the results in docs/.
 
 Reads artifacts/repos.json, artifacts/first_response_summary.json and
-artifacts/stale_prs.json, and writes a single self-contained page,
+artifacts/stale_prs.json (waiting and recently answered PRs), and writes a single self-contained page,
 docs/index.html. It does not need the full first_response.json.
 """
 
@@ -58,6 +58,34 @@ def stale_table(stale_prs):
     return "\n".join(rows)
 
 
+RESPONSE_KIND = {"comment": "", "merge": " (merged)", "close": " (closed)"}
+
+
+def responded_table(responded_prs):
+    """One row per PR and response mode ("any" or "committer")."""
+    rows = []
+    for pr in responded_prs:
+        role = "committer" if pr["authorIsCommitter"] else "contributor"
+        for mode, resp in (("any", pr["anyResponse"]), ("committer", pr["committerResponse"])):
+            if resp is None:
+                continue
+            rows.append(f"""<tr data-mode="{mode}" data-repo="{escape(pr['repo'])}"
+    data-role="{role}" data-search="{escape((pr['repo'] + ' ' + pr['title'] + ' ' + pr['author'] + ' ' + resp['by']).lower())}">
+  <td>{gh_link(pr['repo'])}</td>
+  <td><a href="{escape(pr['url'])}">#{pr['number']}</a> {escape(pr['title'])}</td>
+  <td>{gh_link(pr['author'])}{' <span class="tag">committer</span>' if pr['authorIsCommitter'] else ''}</td>
+  <td>{pr['state'].lower()}</td>
+  <td class="num" data-sort="{resp['waitedSeconds']}">{resp['waitedSeconds'] // 86400}</td>
+  <td class="nowrap" data-sort="{resp['at']}">{fmt_date(resp['at'])}</td>
+  <td>{gh_link(resp['by'])}{RESPONSE_KIND[resp['kind']]}{' <span class="tag">committer</span>' if resp['byCommitter'] else ''}</td>
+</tr>""")
+    return "\n".join(rows)
+
+
+def repo_options(repos):
+    return "\n".join(f'<option value="{escape(r)}">{escape(r)}</option>' for r in repos)
+
+
 def repo_table(repo_names, repo_stats, stale_prs):
     stale = Counter(pr["repo"] for pr in stale_prs)
     neglected = Counter(pr["repo"] for pr in stale_prs if pr["committerComments"] == 0)
@@ -108,6 +136,7 @@ def build():
     repo_list = json.loads(REPOS_FILE.read_text())
     stale = json.loads(STALE_FILE.read_text())
     stale_prs = stale["pullRequests"]
+    responded_prs = stale["respondedPullRequests"]
     overall = summary["overall"]
     repo_names = [r["nameWithOwner"] for org_repos in repo_list["orgs"].values()
                   for r in org_repos]
@@ -116,6 +145,7 @@ def build():
     repos_with_stale = sorted({pr["repo"] for pr in stale_prs})
     generated = datetime.fromisoformat(stale["generatedAt"]).strftime("%Y-%m-%d")
     days = stale["minDaysWaiting"]
+    window = stale["responseWindowDays"]
 
     cards = "".join([
         stat_card(len(repo_names), "repos tracked"),
@@ -123,17 +153,20 @@ def build():
         stat_card(fmt(overall["medianSeconds"]), "median time to first response"),
         stat_card(len(stale_prs), f"open PRs waiting > {days} days"),
         stat_card(neglected_count, "of those with no committer comments"),
+        stat_card(sum(pr["committerResponse"] is not None for pr in responded_prs),
+                  f"answered by a committer after > {days} days, last {window} days"),
     ])
-    repo_options = "\n".join(
-        f'<option value="{escape(r)}">{escape(r)}</option>' for r in repos_with_stale)
 
     html = TEMPLATE.format(
         generated=generated,
         orgs=", ".join(gh_link(o) for o in orgs),
         cards=cards,
         days=days,
-        repo_options=repo_options,
+        window=window,
+        repo_options=repo_options(repos_with_stale),
+        answered_repo_options=repo_options(sorted({pr["repo"] for pr in responded_prs})),
         stale_rows=stale_table(stale_prs),
+        responded_rows=responded_table(responded_prs),
         repo_rows=repo_table(repo_names, summary["repos"], stale_prs),
         comparison_rows=comparison_table(summary["committerComparison"]),
         committer_count=len(summary["committers"]),
@@ -202,14 +235,14 @@ tr.total td {{ font-weight: 600; background: var(--surface); }}
 .nowrap {{ white-space: nowrap; }}
 .tag {{ background: var(--tag-bg); color: var(--tag-fg); border-radius: 10px; padding: 0 7px; font-size: 12px; white-space: nowrap; }}
 .scroll {{ max-height: 640px; overflow-y: auto; }}
-#stale-count {{ font-weight: 600; }}
+.count {{ font-weight: 600; }}
 </style>
 </head>
 <body>
 <main>
 <h1>ROS PR Watch</h1>
 <p class="muted">Pull requests waiting on maintainers in {orgs}. Data collected {generated}.</p>
-<nav><a href="#stale">Waiting PRs</a><a href="#repos">Repos</a><a href="#committers">Committers vs. contributors</a><a href="#distribution">Response times</a><a href="#definitions">Definitions</a></nav>
+<nav><a href="#stale">Waiting PRs</a><a href="#answered">Recently answered</a><a href="#repos">Repos</a><a href="#committers">Committers vs. contributors</a><a href="#distribution">Response times</a><a href="#definitions">Definitions</a></nav>
 
 <div class="cards">{cards}</div>
 
@@ -226,7 +259,7 @@ By default only PRs with <strong>no comments from any committer</strong> are sho
     <option value="committer">Committer authors</option>
   </select>
   <input type="search" id="search" placeholder="Search title, author, repo">
-  <span class="muted"><span id="stale-count"></span> PRs shown</span>
+  <span class="muted"><span id="stale-count" class="count"></span> PRs shown</span>
 </div>
 <div class="table-wrap scroll">
 <table id="stale-table">
@@ -237,6 +270,37 @@ By default only PRs with <strong>no comments from any committer</strong> are sho
 </tr></thead>
 <tbody>
 {stale_rows}
+</tbody>
+</table>
+</div>
+
+<h2 id="answered">Recently answered PRs</h2>
+<p>PRs (open, merged or closed) whose author had waited more than {days} days, where the wait ended with a
+response in the last {window} days. Here a merge or close by someone other than the author counts as a response.
+With <strong>Committers only</strong>, comments from non-committers don't end the wait.</p>
+<div class="controls">
+  <select id="answered-mode" aria-label="Response from">
+    <option value="committer">Response from a committer</option><option value="any">Response from anyone</option>
+  </select>
+  <select id="answered-repo-filter" aria-label="Filter by repo"><option value="">All repos</option>
+{answered_repo_options}
+  </select>
+  <select id="answered-role-filter" aria-label="Filter by author">
+    <option value="">All authors</option><option value="contributor">Non-committer authors</option>
+    <option value="committer">Committer authors</option>
+  </select>
+  <input type="search" id="answered-search" placeholder="Search title, people, repo">
+  <span class="muted"><span id="answered-count" class="count"></span> PRs shown</span>
+</div>
+<div class="table-wrap scroll">
+<table id="answered-table">
+<thead><tr>
+  <th class="sortable">Repo</th><th class="sortable">Pull request</th><th class="sortable">Author</th>
+  <th class="sortable">State</th><th class="sortable num">Days<br>waited</th>
+  <th class="sortable desc">Responded</th><th class="sortable">Responder</th>
+</tr></thead>
+<tbody>
+{responded_rows}
 </tbody>
 </table>
 </div>
@@ -286,8 +350,11 @@ By default only PRs with <strong>no comments from any committer</strong> are sho
 <h2 id="definitions">Definitions</h2>
 <ul>
   <li><strong>Response</strong>: a comment or submitted review by someone other than the PR author. Bot comments are ignored.</li>
-  <li><strong>Committer</strong>: anyone who has merged at least one PR in the tracked repos.</li>
+  <li><strong>Committer</strong>: anyone who has merged at least one PR in the tracked repos, including in the last {window} days.</li>
   <li><strong>Waiting PR</strong>: an open, non-draft PR where the author (counting the PR opening) made the last comment more than {days} days ago.</li>
+  <li><strong>Recently answered PR</strong>: a PR whose author waited more than {days} days, where the wait ended
+    with a response (or a merge or close by someone else) in the last {window} days. For a committer response, the
+    wait runs from the author's last comment to the first committer response after it.</li>
   <li>PRs authored by bots are excluded. Response-time statistics cover only closed PRs that received a response.</li>
 </ul>
 </main>
@@ -317,29 +384,40 @@ By default only PRs with <strong>no comments from any committer</strong> are sho
       }});
     }});
   }}
-  document.querySelectorAll("#stale-table, .sortable-table").forEach(makeSortable);
+  document.querySelectorAll("#stale-table, #answered-table, .sortable-table").forEach(makeSortable);
+
+  // Filter a table's rows by repo, author role and search text, plus an
+  // optional extra test, keeping the shown count up to date.
+  function filterTable(prefix, table, extraInputs, extraTest) {{
+    const byId = id => document.getElementById(prefix + id);
+    const repoFilter = byId("repo-filter");
+    const roleFilter = byId("role-filter");
+    const search = byId("search");
+    const count = document.getElementById(table + "-count");
+    function applyFilters() {{
+      const q = search.value.trim().toLowerCase();
+      let shown = 0;
+      document.querySelectorAll("#" + table + "-table tbody tr").forEach(row => {{
+        const visible = extraTest(row)
+          && (!repoFilter.value || row.dataset.repo === repoFilter.value)
+          && (!roleFilter.value || row.dataset.role === roleFilter.value)
+          && (!q || row.dataset.search.includes(q));
+        row.hidden = !visible;
+        if (visible) shown++;
+      }});
+      count.textContent = shown;
+    }}
+    [repoFilter, roleFilter, ...extraInputs].forEach(el => el.addEventListener("change", applyFilters));
+    search.addEventListener("input", applyFilters);
+    applyFilters();
+  }}
 
   const onlyNeglected = document.getElementById("only-neglected");
-  const repoFilter = document.getElementById("repo-filter");
-  const roleFilter = document.getElementById("role-filter");
-  const search = document.getElementById("search");
-  const count = document.getElementById("stale-count");
-  function applyFilters() {{
-    const q = search.value.trim().toLowerCase();
-    let shown = 0;
-    document.querySelectorAll("#stale-table tbody tr").forEach(row => {{
-      const visible = (!onlyNeglected.checked || row.dataset.neglected === "1")
-        && (!repoFilter.value || row.dataset.repo === repoFilter.value)
-        && (!roleFilter.value || row.dataset.role === roleFilter.value)
-        && (!q || row.dataset.search.includes(q));
-      row.hidden = !visible;
-      if (visible) shown++;
-    }});
-    count.textContent = shown;
-  }}
-  [onlyNeglected, repoFilter, roleFilter].forEach(el => el.addEventListener("change", applyFilters));
-  search.addEventListener("input", applyFilters);
-  applyFilters();
+  filterTable("", "stale", [onlyNeglected],
+    row => !onlyNeglected.checked || row.dataset.neglected === "1");
+  const answeredMode = document.getElementById("answered-mode");
+  filterTable("answered-", "answered", [answeredMode],
+    row => row.dataset.mode === answeredMode.value);
 }})();
 </script>
 </body>
