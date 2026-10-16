@@ -7,6 +7,7 @@ docs/index.html. It does not need the full first_response.json.
 """
 
 import json
+import shutil
 from collections import Counter
 from datetime import datetime
 from html import escape
@@ -17,6 +18,7 @@ from stale_prs import OUTPUT_FILE as STALE_FILE
 from summarize_first_response import load_summary
 
 SITE_DIR = ROOT / "docs"
+FAVICON = ROOT / "favicon.ico"
 
 
 def fmt(seconds):
@@ -140,6 +142,7 @@ def build():
     )
     SITE_DIR.mkdir(exist_ok=True)
     (SITE_DIR / "index.html").write_text(html)
+    shutil.copy(FAVICON, SITE_DIR / FAVICON.name)
     # Tell GitHub Pages to serve the files as-is instead of running Jekyll.
     (SITE_DIR / ".nojekyll").touch()
     print(f"Wrote {(SITE_DIR / 'index.html').relative_to(ROOT)}")
@@ -151,6 +154,7 @@ TEMPLATE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROS PR Watch</title>
+<link rel="icon" href="favicon.ico">
 <style>
 :root {{
   --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0;
