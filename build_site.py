@@ -247,7 +247,7 @@ tr.total td {{ font-weight: 600; background: var(--surface); }}
 <div class="cards">{cards}</div>
 
 <h2 id="stale">Open PRs waiting on a response</h2>
-<p>Open, non-draft PRs where the author made the last comment more than {days} days ago.
+<p>Open, non-draft PRs where the author made the last comment and has waited more than {days} days for a response.
 By default only PRs with <strong>no comments from any committer</strong> are shown.</p>
 <div class="controls">
   <label><input type="checkbox" id="only-neglected" checked> No committer comments only</label>
@@ -277,7 +277,7 @@ By default only PRs with <strong>no comments from any committer</strong> are sho
 <h2 id="answered">Recently answered PRs</h2>
 <p>PRs (open, merged or closed) whose author had waited more than {days} days, where the wait ended with a
 response in the last {window} days. Here a merge or close by someone other than the author counts as a response.
-With <strong>Committers only</strong>, comments from non-committers don't end the wait.</p>
+With <strong>Committers only</strong>, only waits ended by a committer are listed.</p>
 <div class="controls">
   <select id="answered-mode" aria-label="Response from">
     <option value="committer">Response from a committer</option><option value="any">Response from anyone</option>
@@ -351,10 +351,10 @@ With <strong>Committers only</strong>, comments from non-committers don't end th
 <ul>
   <li><strong>Response</strong>: a comment or submitted review by someone other than the PR author. Bot comments are ignored.</li>
   <li><strong>Committer</strong>: anyone who has merged at least one PR in the tracked repos, including in the last {window} days.</li>
-  <li><strong>Waiting PR</strong>: an open, non-draft PR where the author (counting the PR opening) made the last comment more than {days} days ago.</li>
+  <li><strong>Waiting PR</strong>: an open, non-draft PR where the author (counting the PR opening) made the last comment and has waited more than {days} days. The wait runs from the first of the author's comments since anyone else last commented.</li>
   <li><strong>Recently answered PR</strong>: a PR whose author waited more than {days} days, where the wait ended
-    with a response (or a merge or close by someone else) in the last {window} days. For a committer response, the
-    wait runs from the author's last comment to the first committer response after it.</li>
+    with a response (or a merge or close by someone else) in the last {window} days. The wait runs from the first of the
+    author's comments since the previous response, and is ended by any response.</li>
   <li>PRs authored by bots are excluded. Response-time statistics cover only closed PRs that received a response.</li>
 </ul>
 </main>

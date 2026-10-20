@@ -114,14 +114,16 @@ results are not overwritten, and do not update the summary.
   `first_response.py` run, across all examined repos, plus anyone who merged
   a PR within the `stale_prs.py` window (`--window`, default 30 days).
 - **Stale PR**: an open, non-draft PR where the author (including by opening
-  the PR) made the last comment more than a threshold number of days ago
-  (set with `--days`; `DEFAULT_DAYS` in `stale_prs.py`).
+  the PR) made the last comment and has waited more than a threshold number
+  of days (set with `--days`; `DEFAULT_DAYS` in `stale_prs.py`).
+- **Wait**: runs from the first of the author's comments since anyone else
+  last commented, so several author comments in a row don't restart it.
+  Any response, from a committer or not, ends the wait.
 - **Recently answered PR**: an open, merged or closed non-draft PR whose
   author waited more than `--days` days, where the wait ended with a response
   in the last `--window` days. Here a merge or close by someone other than the
   author also counts as a response. Each PR records the latest such response
-  from anyone, and from a committer. Comments from non-committers don't end
-  the wait for a committer response. Comments made after a PR was closed
+  from anyone, and from a committer. Comments made after a PR was closed
   are ignored.
 
 ## Caveats

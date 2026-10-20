@@ -14,9 +14,12 @@ PRs authored by bots or in draft status are skipped.
 A "recently answered" PR is open, merged or closed, and had a response in
 the last M days after the author waited over N days. A merge or close by
 someone other than the author counts as a response. Each such PR records the
-latest qualifying response from anyone, and from a committer. A committer's
-response ends a wait only if no committer has responded since the author's
-last comment, so comments from non-committers don't end it.
+latest qualifying response from anyone, and from a committer.
+
+A wait starts at the first of the author's comments since anyone else last
+commented, so several comments in a row by the author don't restart it. Any
+response ends the wait, so a committer response only counts if no one else
+responded first.
 
 Use --limit N to process only the first N repos (for testing); output then
 goes to artifacts/stale_prs_test.json instead.
@@ -193,15 +196,21 @@ def pr_record(owner, name, pr, committers):
 def stale_record(owner, name, pr, events, committers, cutoff, now):
     """Return a stale-PR record, or None if the PR doesn't qualify."""
     author = login_of(pr["author"])
-    last_at, last_by, _ = events[-1]
-    if last_by != author or parse_time(last_at) > cutoff:
+    # The wait starts at the first of the author's trailing run of comments.
+    start = len(events)
+    while start > 0 and events[start - 1][1] == author:
+        start -= 1
+    if start == len(events):
+        return None
+    started_at = events[start][0]
+    if parse_time(started_at) > cutoff:
         return None
 
     others = [login for _, login, _ in events if login != author]
-    waiting = (now - parse_time(last_at)).total_seconds()
+    waiting = (now - parse_time(started_at)).total_seconds()
     return {
         **pr_record(owner, name, pr, committers),
-        "lastAuthorCommentAt": last_at,
+        "waitStartedAt": started_at,
         "waitingSeconds": round(waiting),
         "waiting": format_duration(waiting),
         "authorComments": len(events) - len(others) - 1,  # excludes opening
@@ -226,23 +235,19 @@ def responded_record(owner, name, pr, events, committers, window_start, min_wait
     """Return a recently-answered record, or None if the PR doesn't qualify."""
     author = login_of(pr["author"])
     any_response = committer_response = None
-    prev_at, prev_by = None, None
-    author_at = None
-    committer_since_author = False
+    # Start of the author's comments since anyone else last commented;
+    # None if not waiting.
+    waiting_since = None
     for at, login, kind in events:
         t = parse_time(at)
         if login == author:
-            author_at = t
-            committer_since_author = False
-        else:
-            in_window = t >= window_start
-            if prev_by == author and in_window and t - prev_at >= min_wait:
-                any_response = response(at, login, kind, prev_at, committers)
-            if login in committers and not committer_since_author:
-                if author_at and in_window and t - author_at >= min_wait:
-                    committer_response = response(at, login, kind, author_at, committers)
-                committer_since_author = True
-        prev_at, prev_by = t, login
+            waiting_since = waiting_since or t
+            continue
+        if waiting_since and t >= window_start and t - waiting_since >= min_wait:
+            any_response = response(at, login, kind, waiting_since, committers)
+            if login in committers:
+                committer_response = any_response
+        waiting_since = None
 
     if any_response is None and committer_response is None:
         return None
@@ -296,7 +301,7 @@ def fetch_repo(gh, owner, name, cutoff, window_start):
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--days", type=int, default=DEFAULT_DAYS,
-                        help="minimum days since the author's last comment "
+                        help="minimum days the author has waited for a response "
                              f"(default: {DEFAULT_DAYS})")
     parser.add_argument("--window", type=int, default=DEFAULT_WINDOW,
                         help="list waits that ended in a response within this "
